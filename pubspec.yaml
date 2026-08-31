@@ -1,7 +1,7 @@
 name: pest_eradication
-description: Pest Eradication V0.1.7 high quality art asset patch
+description: Pest Eradication V0.1.7.1 layout hotfix
 publish_to: "none"
-version: 0.1.7+8
+version: 0.1.7+9
 environment:
   sdk: ">=3.3.0 <4.0.0"
 dependencies:

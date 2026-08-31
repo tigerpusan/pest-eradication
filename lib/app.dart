@@ -257,7 +257,7 @@ class _PhaseCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Expanded(child: Image.asset(asset, fit: BoxFit.contain)),
+          SizedBox(height: 58, child: Image.asset(asset, fit: BoxFit.contain)),
           const SizedBox(height: 6),
           Text(name, style: const TextStyle(fontSize: 14.2, fontWeight: FontWeight.w900, color: Color(0xff173650))),
           const SizedBox(height: 2),
@@ -282,7 +282,8 @@ class _MixedCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Expanded(
+          SizedBox(
+            height: 58,
             child: Stack(
               alignment: Alignment.center,
               children: [
