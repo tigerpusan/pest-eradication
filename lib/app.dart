@@ -28,11 +28,7 @@ class HomeScreen extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              Color(0xff9addff),
-              Color(0xffeefbff),
-              Color(0xfff6fbf2),
-            ],
+            colors: [Color(0xff9addff), Color(0xffeefbff), Color(0xfff7fcf3)],
           ),
         ),
         child: SafeArea(
@@ -44,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 8),
                     Center(
                       child: Container(
                         width: 102,
@@ -57,7 +53,11 @@ class HomeScreen extends StatelessWidget {
                             BoxShadow(color: Color(0x33ff855e), blurRadius: 24, offset: Offset(0, 12)),
                           ],
                         ),
-                        child: const Icon(Icons.pest_control_rodent_rounded, size: 58, color: Color(0xff18334d)),
+                        child: const Icon(
+                          Icons.pest_control_rodent_rounded,
+                          size: 58,
+                          color: Color(0xff18334d),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -102,26 +102,13 @@ class HomeScreen extends StatelessWidget {
                           _BadgeRow(),
                           SizedBox(height: 14),
                           Text(
-                            '마을에 해충이 들끓기 시작했습니다.',
+                            '해충이 들끓기 시작했습니다.',
                             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: Color(0xff173650)),
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(height: 8),
                           Text(
-                            '파리부터 시작해 모기, 나방, 혼합형 웨이브까지 차례로 진행합니다. 해충마다 10단계씩 구성되며, 단계가 올라갈수록 속도와 움직임 패턴이 더 까다로워집니다. 순서를 놓치거나 MISS가 3회 누적되면 2단계 후퇴합니다.',
-                            style: TextStyle(fontSize: 14.5, height: 1.58, color: Color(0xff49667c), fontWeight: FontWeight.w600),
-                          ),
-                          SizedBox(height: 16),
-                          Wrap(
-                            spacing: 8,
-                            runSpacing: 8,
-                            children: [
-                              _MiniTag(text: '파리 10단계'),
-                              _MiniTag(text: '모기 10단계'),
-                              _MiniTag(text: '나방 10단계'),
-                              _MiniTag(text: '혼합 웨이브'),
-                              _MiniTag(text: 'MISS 3회 실패'),
-                              _MiniTag(text: '실패 시 2단계 후퇴'),
-                            ],
+                            '해충을 박멸하여 마을을 구하세요.',
+                            style: TextStyle(fontSize: 15.5, height: 1.55, color: Color(0xff49667c), fontWeight: FontWeight.w700),
                           ),
                         ],
                       ),
@@ -133,17 +120,28 @@ class HomeScreen extends StatelessWidget {
                         color: const Color(0xddf4fcff),
                         borderRadius: BorderRadius.circular(22),
                         border: Border.all(color: const Color(0x664bb5ff)),
+                        boxShadow: const [
+                          BoxShadow(color: Color(0x12005f8f), blurRadius: 18, offset: Offset(0, 8)),
+                        ],
                       ),
                       child: const Row(
                         children: [
-                          Expanded(child: _PhaseCard(title: '1', name: '파리', color: Color(0xffff8d76))),
+                          Expanded(child: _PhaseCard(name: '파리', color: Color(0xffff8d76), type: PestType.fly)),
                           SizedBox(width: 8),
-                          Expanded(child: _PhaseCard(title: '2', name: '모기', color: Color(0xff44c0ff))),
+                          Expanded(child: _PhaseCard(name: '모기', color: Color(0xff44c0ff), type: PestType.mosquito)),
                           SizedBox(width: 8),
-                          Expanded(child: _PhaseCard(title: '3', name: '나방', color: Color(0xffffd15f))),
+                          Expanded(child: _PhaseCard(name: '나방', color: Color(0xffffd15f), type: PestType.moth)),
                           SizedBox(width: 8),
-                          Expanded(child: _PhaseCard(title: '4', name: '혼합', color: Color(0xff5bd07f))),
+                          Expanded(child: _PhaseCard(name: '혼합', color: Color(0xff5bd07f), type: PestType.mixed)),
                         ],
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    const Center(
+                      child: Text(
+                        '순서를 놓치거나 MISS가 3회 누적되면 2단계 후퇴',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 12.5, color: Color(0xff6f8ea1), fontWeight: FontWeight.w700),
                       ),
                     ),
                     const SizedBox(height: 22),
@@ -222,53 +220,199 @@ class _TinyRoundBadge extends StatelessWidget {
   }
 }
 
-class _MiniTag extends StatelessWidget {
-  final String text;
-  const _MiniTag({required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(
-        color: const Color(0xffecf8ff),
-        borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: const Color(0x663f9fe3)),
-      ),
-      child: Text(text, style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w800, color: Color(0xff1e5a78))),
-    );
-  }
-}
+enum PestType { fly, mosquito, moth, mixed }
 
 class _PhaseCard extends StatelessWidget {
-  final String title;
   final String name;
   final Color color;
-  const _PhaseCard({required this.title, required this.name, required this.color});
+  final PestType type;
+  const _PhaseCard({required this.name, required this.color, required this.type});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: color.withOpacity(.7), width: 1.5),
+        border: Border.all(color: color.withOpacity(.78), width: 1.7),
       ),
       child: Column(
         children: [
-          Container(
-            width: 26,
-            height: 26,
-            decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-            alignment: Alignment.center,
-            child: Text(title, style: const TextStyle(fontWeight: FontWeight.w900, color: Colors.white)),
-          ),
+          SizedBox(height: 38, child: Center(child: _PestGlyph(type: type))),
           const SizedBox(height: 8),
           Text(name, style: const TextStyle(fontSize: 14.5, fontWeight: FontWeight.w900, color: Color(0xff173650))),
           const SizedBox(height: 2),
           const Text('10단계', style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: Color(0xff678094))),
         ],
+      ),
+    );
+  }
+}
+
+class _PestGlyph extends StatelessWidget {
+  final PestType type;
+  const _PestGlyph({required this.type});
+
+  @override
+  Widget build(BuildContext context) {
+    if (type == PestType.mixed) {
+      return SizedBox(
+        width: 40,
+        height: 34,
+        child: Stack(
+          alignment: Alignment.center,
+          children: const [
+            Positioned(left: 0, top: 8, child: _FlyGlyph(scale: .62)),
+            Positioned(right: 2, top: 1, child: _MosquitoGlyph(scale: .58)),
+            Positioned(bottom: 0, child: _MothGlyph(scale: .62)),
+          ],
+        ),
+      );
+    }
+    return switch (type) {
+      PestType.fly => const _FlyGlyph(),
+      PestType.mosquito => const _MosquitoGlyph(),
+      PestType.moth => const _MothGlyph(),
+      PestType.mixed => const SizedBox.shrink(),
+    };
+  }
+}
+
+class _FlyGlyph extends StatelessWidget {
+  final double scale;
+  const _FlyGlyph({this.scale = 1});
+
+  @override
+  Widget build(BuildContext context) {
+    return Transform.scale(
+      scale: scale,
+      child: SizedBox(
+        width: 34,
+        height: 28,
+        child: Stack(
+          children: [
+            Positioned(left: 4, top: 5, child: _Wing(width: 11, height: 14, angle: -0.6)),
+            Positioned(right: 4, top: 5, child: _Wing(width: 11, height: 14, angle: 0.6)),
+            Positioned(left: 10, top: 8, child: Container(width: 14, height: 16, decoration: const BoxDecoration(color: Color(0xff253845), shape: BoxShape.circle))),
+            Positioned(left: 5, top: 6, child: _EyeBubble(size: 8)),
+            Positioned(right: 5, top: 6, child: _EyeBubble(size: 8)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _MosquitoGlyph extends StatelessWidget {
+  final double scale;
+  const _MosquitoGlyph({this.scale = 1});
+
+  @override
+  Widget build(BuildContext context) {
+    return Transform.scale(
+      scale: scale,
+      child: SizedBox(
+        width: 36,
+        height: 26,
+        child: Stack(
+          children: [
+            Positioned(left: 1, top: 2, child: _Wing(width: 13, height: 8, angle: -0.9)),
+            Positioned(right: 1, top: 2, child: _Wing(width: 13, height: 8, angle: 0.9)),
+            Positioned(left: 15, top: 3, child: Container(width: 6, height: 17, decoration: BoxDecoration(color: const Color(0xff293c47), borderRadius: BorderRadius.circular(10)))),
+            Positioned(left: 12, top: 1, child: Container(width: 12, height: 8, decoration: const BoxDecoration(color: Color(0xff324651), shape: BoxShape.circle))),
+            Positioned(left: 15, top: -1, child: Container(width: 2, height: 8, decoration: BoxDecoration(color: const Color(0xff324651), borderRadius: BorderRadius.circular(2)))),
+            Positioned(left: 10, top: 2, child: _EyeBubble(size: 7)),
+            Positioned(right: 10, top: 2, child: _EyeBubble(size: 7)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _MothGlyph extends StatelessWidget {
+  final double scale;
+  const _MothGlyph({this.scale = 1});
+
+  @override
+  Widget build(BuildContext context) {
+    return Transform.scale(
+      scale: scale,
+      child: SizedBox(
+        width: 36,
+        height: 28,
+        child: Stack(
+          children: [
+            Positioned(left: 2, top: 4, child: _MothWing(left: true)),
+            Positioned(right: 2, top: 4, child: _MothWing(left: false)),
+            Positioned(left: 14, top: 6, child: Container(width: 8, height: 15, decoration: BoxDecoration(color: const Color(0xff66523f), borderRadius: BorderRadius.circular(8)))),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _Wing extends StatelessWidget {
+  final double width;
+  final double height;
+  final double angle;
+  const _Wing({required this.width, required this.height, required this.angle});
+
+  @override
+  Widget build(BuildContext context) {
+    return Transform.rotate(
+      angle: angle,
+      child: Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(colors: [Color(0xfffefefe), Color(0xffcce8fb)]),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: const Color(0xffa5cde4), width: 1),
+        ),
+      ),
+    );
+  }
+}
+
+class _EyeBubble extends StatelessWidget {
+  final double size;
+  const _EyeBubble({required this.size});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: RadialGradient(
+          center: Alignment(-0.2, -0.2),
+          colors: [Color(0xffffd5cb), Color(0xffff997b), Color(0xffef614a)],
+        ),
+      ),
+    );
+  }
+}
+
+class _MothWing extends StatelessWidget {
+  final bool left;
+  const _MothWing({required this.left});
+
+  @override
+  Widget build(BuildContext context) {
+    return Transform.rotate(
+      angle: left ? -0.45 : 0.45,
+      child: Container(
+        width: 14,
+        height: 18,
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(colors: [Color(0xffffefbe), Color(0xffe2c36e)]),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: const Color(0xffc59a42), width: 1.2),
+        ),
       ),
     );
   }
