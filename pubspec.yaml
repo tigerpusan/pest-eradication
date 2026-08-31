@@ -1,7 +1,7 @@
 name: pest_eradication
-description: Pest Eradication V0.1.7.1 layout hotfix
+description: Pest Eradication V0.1.7.2 shotgun zone audio patch
 publish_to: "none"
-version: 0.1.7+9
+version: 0.1.7+10
 environment:
   sdk: ">=3.3.0 <4.0.0"
 dependencies:
