@@ -1,16 +1,13 @@
-# 해충 박멸 V0.1.0
+# 해충 박멸 V0.1.3
 
-First Android app scaffold.
+기본 포맷 집중 버전
 
-## Important
-This package contains Flutter source + the validated local HTML game engine.
-A release APK still requires a Flutter SDK/Android build environment.
+## 특징
+- 장총 1종 고정
+- 파리만 등장
+- 1~10단계 난이도 상승
+- 터치 즉시 판정
+- 번호 순서대로 조준 · 발사
 
-## Build
-```bash
-flutter create . --platforms=android --org com.pesteradication
-flutter pub get
-flutter test
-flutter build apk --release
-```
-APK output: `build/app/outputs/flutter-apk/app-release.apk`
+Artifact:
+`pest-eradication-v0.1.3-apk`
