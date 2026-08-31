@@ -36,8 +36,13 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
-      - name: Run tests
-        run: flutter test
+      # flutter create가 자동 생성하는 기본 MyApp 테스트 제거
+      - name: Remove generated sample test
+        run: rm -f test/widget_test.dart
+
+      # 해충박멸 자체 게임 규칙 테스트
+      - name: Run game rule tests
+        run: flutter test test/weapon_rules_test.dart
 
       - name: Build release APK
         run: flutter build apk --release
