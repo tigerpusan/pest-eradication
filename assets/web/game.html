@@ -3,115 +3,165 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>해충 박멸 V0.1.3</title>
+<title>해충 박멸 V0.1.4</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;height:100%;overflow:hidden;background:#07131b;font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;touch-action:none}
-#game{position:relative;height:100%;overflow:hidden;background:radial-gradient(circle at 50% 26%,#eefbff 0 10%,transparent 32%),linear-gradient(#70caf1 0%,#c1efff 55%,#89c85a 56%,#3f6f32 100%)}
-#game:after{content:"";position:absolute;left:-5%;right:-5%;bottom:0;height:40%;background:linear-gradient(180deg,#72b84f,#3d7934 65%,#264b2c);opacity:.92;z-index:0}
-.cloud{position:absolute;background:#fff5;border-radius:60px;width:150px;height:56px;filter:blur(1px)}
-.c1{top:120px;left:-15px}.c2{top:210px;right:-25px;width:120px;height:42px}.c3{top:340px;left:60px;width:190px;height:62px;opacity:.4}
-.topHud{position:absolute;z-index:20;left:12px;right:12px;top:12px;display:grid;grid-template-columns:56px 1fr 120px;gap:10px;align-items:center}
-#backBtn,.stageCard,.timeCard,.scoreCard,.missCard{background:#09243add;border:1px solid #ffffff35;border-radius:18px;color:#fff;box-shadow:0 8px 24px #0018}
-#backBtn{height:58px;font-size:42px;color:#fff;line-height:42px}
-.stageCard,.timeCard,.scoreCard,.missCard{display:flex;align-items:center;justify-content:center;font-weight:1000}
-.stageCard{height:58px;font-size:19px}
-.timeCard{height:58px;font-size:18px;color:#ffe16a}
-.subHud{position:absolute;z-index:19;left:78px;right:12px;top:82px;display:grid;grid-template-columns:1fr 150px;gap:10px}
-.scoreCard,.missCard{height:52px;font-size:17px}
-.scoreCard{justify-content:flex-start;padding-left:20px}
-.scoreCard #score{font-size:26px;margin-left:10px}
-#levelBanner{position:absolute;z-index:18;left:50%;top:145px;transform:translateX(-50%);background:#071b2dd9;color:#fff;padding:8px 16px;border-radius:16px;font-size:18px;font-weight:1000;box-shadow:0 6px 16px #0004}
-#cross{position:absolute;z-index:15;width:54px;height:54px;border:3px solid #ff3838;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none}
-#cross:before,#cross:after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#ff3838}
-#cross:before{width:72px;height:3px}#cross:after{width:3px;height:72px}
-#tip{position:absolute;z-index:16;left:50%;bottom:16px;transform:translateX(-50%);background:#071b2de8;color:#fff;padding:10px 18px;border-radius:18px;border:1px solid #ffffff30;font-size:15px;font-weight:900}
-#rifle{position:absolute;z-index:12;left:50%;bottom:-12px;width:180px;height:260px;transform:translateX(-50%);transform-origin:50% 100%;pointer-events:none;filter:drop-shadow(0 12px 10px #0006)}
-#rifle .barrel{position:absolute;left:76px;top:0;width:28px;height:165px;border-radius:12px 12px 4px 4px;background:linear-gradient(90deg,#080808,#7c858c 40%,#181818 72%,#090909);box-shadow:inset 0 0 0 2px #889099}
-#rifle .muzzle{position:absolute;left:71px;top:-8px;width:38px;height:18px;border-radius:50%;background:#111;border:4px solid #636c74}
-#rifle .body{position:absolute;left:58px;top:145px;width:58px;height:18px;border-radius:10px;background:#1a1a1a;box-shadow:0 4px 0 #5a6166}
-#rifle .scope{position:absolute;left:46px;top:102px;width:42px;height:28px;border:5px solid #202020;border-radius:50%;background:transparent}
-#rifle .stock{position:absolute;left:40px;top:160px;width:76px;height:82px;background:linear-gradient(135deg,#8d5634,#391f17);border:4px solid #1e120e;border-radius:10px 16px 24px 12px;transform:rotate(-9deg)}
-#rifle .trigger{position:absolute;left:64px;top:168px;width:26px;height:32px;border:4px solid #222;border-top:0;border-radius:0 0 16px 16px}
-#rifle.kick{animation:kick .14s ease-out}
-@keyframes kick{50%{transform:translateX(-50%) translateY(10px) rotate(2deg)}}
-.bug{position:absolute;z-index:10;width:74px;height:58px;transform:translate(-50%,-50%);filter:drop-shadow(0 7px 6px #0007)}
-.bug .wing{position:absolute;top:8px;width:28px;height:20px;border-radius:50% 50% 60% 60%;border:2px solid #eefcff;background:linear-gradient(135deg,#ffffffdb,#bceeff66);box-shadow:inset 0 0 6px #fff}
-.bug .wing.l{left:4px;transform:rotate(-14deg)} .bug .wing.r{right:4px;transform:rotate(14deg)}
-.bug .body{position:absolute;left:18px;top:14px;width:38px;height:30px;border-radius:50%;border:2px solid #141414;background:repeating-linear-gradient(90deg,#161616 0 6px,#d8b437 6px 12px);box-shadow:inset -4px -3px 7px #0007,inset 3px 2px 4px #fff2}
-.bug .eye{position:absolute;top:8px;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffbdb6 0 25%,#dc4338 50%,#71140c 100%);box-shadow:0 1px 2px #000}
-.bug .eye.l{left:18px}.bug .eye.r{right:18px}
-.bug .legs:before,.bug .legs:after{content:"";position:absolute;top:34px;width:18px;height:2px;background:#2b241f;box-shadow:0 8px 0 #2b241f,0 16px 0 #2b241f}
-.bug .legs:before{left:8px;transform:rotate(20deg)} .bug .legs:after{right:8px;transform:rotate(-20deg)}
-.bugNo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);min-width:24px;height:24px;padding:0 4px;border-radius:50%;background:#fff;color:#111;border:2px solid #d71920;font-size:14px;line-height:20px;text-align:center;font-weight:1000;box-shadow:0 2px 5px #0009}
-.hitFx{position:absolute;z-index:25;width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:0 0 14px 8px #ffd23d,0 0 28px 16px #ff6200;transform:translate(-50%,-50%);animation:hit .16s ease-out forwards;pointer-events:none}
-.hitText{position:absolute;z-index:25;color:#ffe54d;font-weight:1000;text-shadow:0 2px 3px #000;transform:translate(-50%,-50%);animation:floatUp .5s ease-out forwards}
-@keyframes hit{to{opacity:0;transform:translate(-50%,-50%) scale(2.8)}}
-@keyframes floatUp{to{opacity:0;transform:translate(-50%,-95%) scale(1.15)}}
-#overlay{position:absolute;z-index:40;inset:0;background:#08101ddd;display:none;align-items:center;justify-content:center;padding:18px}
-.card{width:100%;max-width:360px;background:#1b2d3c;border:1px solid #ffffff2f;border-radius:24px;padding:24px;color:#fff;text-align:center;box-shadow:0 12px 30px #0007}
-.card h2{margin:0 0 8px;font-size:30px}
-.card p{margin:8px 0;color:#dfe8f1;line-height:1.6;white-space:pre-line}
+html,body{margin:0;height:100%;overflow:hidden;font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;touch-action:none;background:#8edcff}
+:root{--hudH:52px}
+#game{position:relative;height:100%;overflow:hidden;background:linear-gradient(180deg,#7fd6ff 0%,#d8f4ff 42%,#dff7ff 54%,#87d36a 55%,#67ba4c 74%,#4d9d43 100%)}
+#sun{position:absolute;left:50%;top:120px;width:170px;height:170px;transform:translateX(-50%);background:radial-gradient(circle,#fffde8 0%,#fff4b8 22%,rgba(255,255,255,0) 65%);opacity:.9;filter:blur(2px);z-index:0}
+.cloud{position:absolute;z-index:1;background:rgba(255,255,255,.84);border-radius:999px;box-shadow:0 4px 10px rgba(255,255,255,.18)}
+.cloud:before,.cloud:after{content:"";position:absolute;border-radius:50%;background:inherit}
+.cloud:before{width:44%;height:130%;left:12%;top:-45%}
+.cloud:after{width:38%;height:105%;right:14%;top:-26%}
+.c1{top:88px;left:24px;width:140px;height:40px}.c2{top:160px;right:16px;width:120px;height:34px}.c3{top:240px;left:-20px;width:160px;height:46px;opacity:.62}
+.hillBack{position:absolute;left:-5%;right:-5%;bottom:27%;height:110px;background:linear-gradient(180deg,#88cc68,#68b254);border-radius:55% 55% 0 0 / 100% 100% 0 0;z-index:1;opacity:.72}
+.village{position:absolute;left:0;right:0;bottom:30%;height:90px;z-index:2;opacity:.35}
+.house{position:absolute;bottom:0;width:68px;height:52px;background:#8ab0be;border-radius:12px 12px 0 0}
+.house:before{content:"";position:absolute;left:8px;right:8px;top:-22px;height:26px;background:#7396a3;clip-path:polygon(50% 0,0 100%,100% 100%)}
+.house:after{content:"";position:absolute;left:12px;top:16px;width:12px;height:16px;background:#fff6a7;box-shadow:18px 0 0 #fff6a7,36px 0 0 #fff6a7}
+.h1{left:14px}.h2{left:110px;transform:scale(.88)}.h3{right:118px;transform:scale(1.05)}.h4{right:20px;transform:scale(.9)}
+#grassFront{position:absolute;left:0;right:0;bottom:0;height:33%;background:linear-gradient(180deg,#75c652,#4ba042 100%);z-index:2}
+#grassFront:before{content:"";position:absolute;left:-5%;right:-5%;top:-18px;height:36px;background:#95da72;border-radius:50% 50% 0 0 / 100% 100% 0 0}
+#hud{position:absolute;left:10px;right:10px;top:10px;height:var(--hudH);display:grid;grid-template-columns:46px 1.3fr 1fr .85fr .85fr;gap:7px;z-index:30}
+.hudCell{height:100%;display:flex;align-items:center;justify-content:center;background:rgba(16,73,108,.88);color:#fff;border:2px solid rgba(255,255,255,.22);border-radius:16px;box-shadow:0 10px 18px rgba(3,38,60,.18)}
+#backBtn{font-size:34px;font-weight:900;line-height:1;border:none}
+.hudStat{flex-direction:column;gap:1px;padding-top:5px;overflow:hidden}
+.hudStat .label{font-size:10px;font-weight:900;letter-spacing:.4px;color:#d2ecff;line-height:1}
+.hudStat .value{font-size:clamp(12px,3vw,18px);font-weight:1000;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#timeWrap .value{color:#ffe56b}
+#missWrap .value{font-size:15px;letter-spacing:1px}
+#scoreWrap .value{font-size:17px}
+#banner{position:absolute;left:50%;top:72px;transform:translateX(-50%);z-index:28;background:#fff3a3;color:#5a4200;padding:8px 16px;border-radius:999px;font-weight:1000;font-size:16px;box-shadow:0 8px 18px rgba(94,76,0,.18)}
+#storyTag{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:20;min-width:238px;max-width:88%;padding:11px 18px;text-align:center;background:rgba(10,70,99,.9);color:#fff;border:2px solid rgba(255,255,255,.18);border-radius:20px;box-shadow:0 10px 16px rgba(6,37,54,.2);font-size:14px;font-weight:900}
+#cross{position:absolute;z-index:18;width:50px;height:50px;border:3px solid #ff5a4f;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;box-shadow:0 0 0 4px rgba(255,255,255,.18)}
+#cross:before,#cross:after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#ff5a4f}
+#cross:before{width:68px;height:3px}#cross:after{width:3px;height:68px}
+#cross .dot{position:absolute;left:50%;top:50%;width:7px;height:7px;transform:translate(-50%,-50%);border-radius:50%;background:#ff5a4f}
+#rifle{--ang:0deg;position:absolute;z-index:16;left:50%;bottom:-2px;width:160px;height:245px;transform:translateX(-50%) rotate(var(--ang));transform-origin:50% 100%;pointer-events:none;filter:drop-shadow(0 10px 12px rgba(0,0,0,.24))}
+#rifle.kick{animation:kick .13s ease-out}
+@keyframes kick{0%,100%{transform:translateX(-50%) rotate(var(--ang))}50%{transform:translateX(-50%) translateY(10px) rotate(calc(var(--ang) + 1.6deg))}}
+#rifle .barrel{position:absolute;left:71px;top:12px;width:18px;height:148px;border-radius:10px;background:linear-gradient(90deg,#111,#7f8c96 34%,#272c31 68%,#111);border:2px solid rgba(255,255,255,.22)}
+#rifle .muzzle{position:absolute;left:65px;top:0;width:30px;height:18px;background:#20262b;border-radius:50%;border:4px solid #5a6973}
+#rifle .pump{position:absolute;left:56px;top:105px;width:46px;height:34px;background:linear-gradient(135deg,#8d6137,#5e3b1f);border-radius:10px;border:3px solid #5a3316}
+#rifle .stock{position:absolute;left:46px;top:144px;width:64px;height:86px;background:linear-gradient(135deg,#9c6840,#5a341c);border:4px solid #442412;border-radius:16px 18px 20px 22px;transform:rotate(-8deg)}
+#rifle .trigger{position:absolute;left:62px;top:145px;width:24px;height:28px;border:4px solid #263138;border-top:0;border-radius:0 0 16px 16px}
+#rifle .flash{position:absolute;left:51px;top:-16px;width:58px;height:58px;border-radius:50%;background:radial-gradient(circle,#fff7a4 0%,#ffc72e 24%,rgba(255,160,0,.16) 56%,rgba(255,160,0,0) 72%);opacity:0;transform:scale(.4)}
+#rifle.fire .flash{animation:flash .12s ease-out}
+@keyframes flash{0%{opacity:0;transform:scale(.4)}30%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.3)}}
+.bug{position:absolute;z-index:12;width:58px;height:46px;transform:translate(-50%,-50%);filter:drop-shadow(0 5px 6px rgba(0,0,0,.16))}
+.bug .wing{position:absolute;top:10px;width:22px;height:16px;background:linear-gradient(135deg,rgba(255,255,255,.95),rgba(193,233,255,.48));border:2px solid rgba(130,177,204,.65);border-radius:55% 55% 70% 70%}
+.bug .wing.l{left:4px;transform:rotate(-20deg)} .bug .wing.r{right:4px;transform:rotate(20deg)}
+.bug .head{position:absolute;left:19px;top:10px;width:16px;height:16px;border-radius:50%;background:#2f3d46}
+.bug .thorax{position:absolute;left:16px;top:17px;width:22px;height:15px;border-radius:12px;background:linear-gradient(180deg,#374852,#1f2a31)}
+.bug .tail{position:absolute;left:18px;top:26px;width:18px;height:14px;border-radius:40% 40% 55% 55%;background:linear-gradient(180deg,#4d5d66,#25323a)}
+.bug .eye{position:absolute;top:12px;width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffd1c7 0%,#ff9574 34%,#ff5b4e 65%,#8e2a1d 100%);box-shadow:0 0 0 1px rgba(255,255,255,.25)}
+.bug .eye.l{left:14px}.bug .eye.r{right:14px}
+.bug .antenna:before,.bug .antenna:after{content:"";position:absolute;top:8px;width:10px;height:2px;background:#1d2830;border-radius:999px}
+.bug .antenna:before{left:18px;transform:rotate(-30deg)}.bug .antenna:after{right:18px;transform:rotate(30deg)}
+.bug .leg:before,.bug .leg:after{content:"";position:absolute;top:28px;width:12px;height:2px;background:#2d3940;box-shadow:0 6px 0 #2d3940}
+.bug .leg:before{left:6px;transform:rotate(18deg)} .bug .leg:after{right:6px;transform:rotate(-18deg)}
+.bugNo{position:absolute;left:50%;top:23px;transform:translateX(-50%);min-width:20px;height:20px;padding:0 4px;border-radius:50%;background:#fff;color:#173650;border:2px solid #ff6a4f;font-size:12px;line-height:16px;text-align:center;font-weight:1000;box-shadow:0 2px 4px rgba(0,0,0,.18)}
+.hitFx{position:absolute;z-index:40;width:18px;height:18px;transform:translate(-50%,-50%);pointer-events:none}
+.hitFx:before,.hitFx:after{content:"";position:absolute;inset:0;background:radial-gradient(circle,#fff9c4 0%,#ffd54a 38%,rgba(255,182,46,.42) 60%,rgba(255,182,46,0) 76%)}
+.hitFx:after{transform:rotate(45deg)}
+.hitFx{animation:burst .18s ease-out forwards}
+@keyframes burst{to{opacity:0;transform:translate(-50%,-50%) scale(2.6)}}
+.hitText{position:absolute;z-index:41;color:#fff;font-weight:1000;text-shadow:0 2px 4px rgba(0,0,0,.25);transform:translate(-50%,-50%);pointer-events:none;animation:floatUp .5s ease-out forwards}
+@keyframes floatUp{to{opacity:0;transform:translate(-50%,-95%) scale(1.08)}}
+#overlay{position:absolute;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(9,43,61,.36);backdrop-filter:blur(4px)}
+.card{width:100%;max-width:360px;border-radius:28px;padding:24px 20px 20px;text-align:center;color:#18334a;background:linear-gradient(180deg,#ffffff,#eef9ff);border:2px solid rgba(255,255,255,.95);box-shadow:0 20px 38px rgba(0,39,60,.22)}
+.card.fail{background:linear-gradient(180deg,#fff7f4,#ffe8e4)}
+.card h2{margin:0 0 8px;font-size:30px;font-weight:1000}
+.card p{margin:10px 0 0;white-space:pre-line;line-height:1.55;font-weight:700;color:#4e6475}
+#ovIcon{font-size:46px;line-height:1;margin-bottom:8px}
 .actions{display:flex;gap:10px;margin-top:18px}
-.actions button{flex:1;border:0;border-radius:14px;padding:13px;font-size:16px;font-weight:1000}
-.primary{background:#ffd13f;color:#201700}.secondary{background:#fff;color:#111}
+.actions button{flex:1;border:none;border-radius:16px;padding:14px 10px;font-size:16px;font-weight:1000}
+.primary{background:#ffd13f;color:#3b2b00}.secondary{background:#0e6ba0;color:#fff}
+@media (max-width:390px){#hud{grid-template-columns:42px 1.2fr .95fr .82fr .82fr;gap:5px} .hudStat .value{font-size:12px} .hudStat .label{font-size:9px} #storyTag{font-size:13px;min-width:210px} }
 </style>
 </head>
 <body>
 <div id="game">
+  <div id="sun"></div>
   <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
-  <div class="topHud">
-    <button id="backBtn">‹</button>
-    <div class="stageCard">파리 <span id="waveLabel" style="margin-left:6px">1</span> 단계</div>
-    <div class="timeCard">⏱ <span id="timeLeft" style="margin-left:6px">10.0</span>s</div>
+  <div class="hillBack"></div>
+  <div class="village"><div class="house h1"></div><div class="house h2"></div><div class="house h3"></div><div class="house h4"></div></div>
+  <div id="grassFront"></div>
+
+  <div id="hud">
+    <button id="backBtn" class="hudCell">‹</button>
+    <div id="stageWrap" class="hudCell hudStat"><span class="label">STAGE</span><span class="value" id="waveLabel">파리 1단계</span></div>
+    <div id="scoreWrap" class="hudCell hudStat"><span class="label">SCORE</span><span class="value" id="score">0</span></div>
+    <div id="missWrap" class="hudCell hudStat"><span class="label">MISS</span><span class="value" id="missDots">○○○</span></div>
+    <div id="timeWrap" class="hudCell hudStat"><span class="label">TIME</span><span class="value" id="timeLeft">10.0s</span></div>
   </div>
-  <div class="subHud">
-    <div class="scoreCard">🎯 SCORE <span id="score">0</span></div>
-    <div class="missCard">MISS <span id="missDots" style="margin-left:8px">○ ○ ○</span></div>
-  </div>
-  <div id="levelBanner">1마리 출현!</div>
-  <div id="cross"></div>
+  <div id="banner">1마리 출현!</div>
+  <div id="cross"><span class="dot"></span></div>
   <div id="rifle">
-    <div class="muzzle"></div><div class="barrel"></div><div class="scope"></div><div class="body"></div><div class="stock"></div><div class="trigger"></div>
+    <div class="flash"></div><div class="muzzle"></div><div class="barrel"></div><div class="pump"></div><div class="stock"></div><div class="trigger"></div>
   </div>
-  <div id="tip">번호 순서대로 조준 · 발사</div>
+  <div id="storyTag">1번부터 차례대로 박멸하세요</div>
   <div id="overlay">
-    <div class="card">
-      <h2 id="ovTitle">실패했습니다</h2>
-      <p id="ovText">다시 도전하세요</p>
+    <div class="card" id="ovCard">
+      <div id="ovIcon">⭐</div>
+      <h2 id="ovTitle">박멸 성공!</h2>
+      <p id="ovText">다음 해충 떼가 감지되었습니다.</p>
       <div class="actions">
-        <button class="primary" id="retryBtn">다시 시작</button>
+        <button class="primary" id="retryBtn">다시 도전</button>
         <button class="secondary" id="resetBtn">처음부터</button>
       </div>
     </div>
   </div>
 </div>
 <script>
-const game=document.getElementById('game'), cross=document.getElementById('cross'), rifle=document.getElementById('rifle'), overlay=document.getElementById('overlay');
-const scoreEl=document.getElementById('score'), waveLabel=document.getElementById('waveLabel'), timeLeftEl=document.getElementById('timeLeft'), missDotsEl=document.getElementById('missDots'), levelBanner=document.getElementById('levelBanner');
-let wave=1, score=0, misses=0, flies=[], transitioning=false, running=true, last=performance.now(), timerHandle=null, stageDeadline=0;
+const game=document.getElementById('game');
+const cross=document.getElementById('cross');
+const rifle=document.getElementById('rifle');
+const overlay=document.getElementById('overlay');
+const ovCard=document.getElementById('ovCard');
+const ovTitle=document.getElementById('ovTitle');
+const ovText=document.getElementById('ovText');
+const ovIcon=document.getElementById('ovIcon');
+const scoreEl=document.getElementById('score');
+const waveLabel=document.getElementById('waveLabel');
+const timeLeftEl=document.getElementById('timeLeft');
+const missDotsEl=document.getElementById('missDots');
+const banner=document.getElementById('banner');
+const storyTag=document.getElementById('storyTag');
+const retryBtn=document.getElementById('retryBtn');
+const resetBtn=document.getElementById('resetBtn');
+
 const MAX_WAVE=10;
+let wave=1, score=0, misses=0, flies=[], transitioning=false, running=true, last=performance.now(), timerHandle=null, stageDeadline=0, sessionStarted=false;
+
 function bounds(){return game.getBoundingClientRect()}
-function updateHud(){scoreEl.textContent=score;waveLabel.textContent=wave;missDotsEl.textContent=[0,1,2].map(i=>i<misses?'●':'○').join(' ')}
-function showBanner(msg){levelBanner.textContent=msg;levelBanner.style.opacity='1';clearTimeout(showBanner._t);showBanner._t=setTimeout(()=>levelBanner.style.opacity='0.92',700)}
 function stageSeconds(w){return w===1?10:w<=3?15:w<=6?20:25}
-function stopTimer(){if(timerHandle){clearInterval(timerHandle);timerHandle=null}}
-function startTimer(){stopTimer();const sec=stageSeconds(wave);stageDeadline=performance.now()+sec*1000;timeLeftEl.textContent=sec.toFixed(1);timerHandle=setInterval(()=>{if(transitioning)return;const left=Math.max(0,(stageDeadline-performance.now())/1000);timeLeftEl.textContent=left.toFixed(1);if(left<=0){stopTimer();failStage('시간 초과로 실패했습니다')}},100)}
-function bugHtml(no){return '<div class="wing l"></div><div class="wing r"></div><div class="legs"></div><div class="body"></div><div class="eye l"></div><div class="eye r"></div><div class="bugNo">'+no+'</div>'}
-function spawn(count){flies.forEach(f=>f.el.remove());flies=[];misses=0;updateHud();overlay.style.display='none';running=true;transitioning=false;const r=bounds();for(let i=0;i<count;i++){const el=document.createElement('div');el.className='bug';el.innerHTML=bugHtml(i+1);game.appendChild(el);const angle=Math.random()*6.28;const speed=115+wave*12;flies.push({el,alive:true,no:i+1,x:70+Math.random()*(r.width-140),y:170+Math.random()*(r.height*0.45-170),vx:Math.cos(angle)*speed,vy:Math.sin(angle)*(speed*0.72),phase:Math.random()*6.28})}showBanner(count+'마리 출현!');startTimer();last=performance.now()}
-function nextWave(){stopTimer();if(wave<MAX_WAVE){wave++;spawn(wave)}else{transitioning=true;overlay.style.display='flex';document.getElementById('ovTitle').textContent='클리어!';document.getElementById('ovText').textContent='모든 파리 단계를 클리어했습니다. 점수 '+score}}
-function failStage(reason){if(transitioning)return;stopTimer();transitioning=true;running=false;const retryWave=Math.max(1,wave-2);overlay.style.display='flex';document.getElementById('ovTitle').textContent='실패했습니다';document.getElementById('ovText').textContent=reason+'\n'+wave+'단계 → '+retryWave+'단계로 하락';overlay.dataset.retryWave=String(retryWave)}
-function fireFx(x,y,text){const flash=document.createElement('div');flash.className='hitFx';flash.style.left=x+'px';flash.style.top=y+'px';game.appendChild(flash);setTimeout(()=>flash.remove(),180);const t=document.createElement('div');t.className='hitText';t.style.left=x+'px';t.style.top=y+'px';t.textContent=text;game.appendChild(t);setTimeout(()=>t.remove(),520);rifle.classList.remove('kick');void rifle.offsetWidth;rifle.classList.add('kick')}
 function expectedNo(){const alive=flies.filter(f=>f.alive).map(f=>f.no);return alive.length?Math.min(...alive):null}
-function shoot(x,y){if(transitioning||!running)return;const near=flies.filter(f=>f.alive).map(f=>({f,d:Math.hypot(f.x-x,f.y-y)})).sort((a,b)=>a.d-b.d)[0];if(near&&near.d<38){const need=expectedNo();if(near.f.no!==need){misses++;updateHud();fireFx(x,y,'MISS '+need+'번 먼저!');if(misses>=3)failStage('순서를 잘못 맞혔습니다');return}near.f.alive=false;near.f.el.remove();score+=100*wave;updateHud();fireFx(near.f.x,near.f.y,'💥 '+near.f.no);if(flies.every(f=>!f.alive))setTimeout(nextWave,320)}else{misses++;updateHud();fireFx(x,y,'MISS');if(misses>=3)failStage('MISS 3회로 실패했습니다')}}
-function aimAt(x,y){cross.style.left=x+'px';cross.style.top=y+'px';const r=bounds();const ang=Math.atan2(x-r.width/2,Math.max(80,r.height-y))*18;rifle.style.transform='translateX(-50%) rotate('+ang+'deg)'}
-function loop(now){const dt=Math.min(0.03,(now-last)/1000);last=now;if(running){const r=bounds();flies.filter(f=>f.alive).forEach((f,i)=>{f.phase+=dt*(3.2+i*0.08);f.vx+=Math.sin(f.phase*1.9)*(18+wave*2)*dt;f.vy+=Math.cos(f.phase*2.1)*(17+wave*2)*dt;f.x+=f.vx*dt+Math.sin(f.phase)*(8+wave*0.7)*dt;f.y+=f.vy*dt+Math.cos(f.phase*1.2)*(7+wave*0.55)*dt;if(f.x<38||f.x>r.width-38)f.vx*=-1;if(f.y<165||f.y>r.height*0.52)f.vy*=-1;f.x=Math.max(38,Math.min(r.width-38,f.x));f.y=Math.max(165,Math.min(r.height*0.52,f.y));f.el.style.left=f.x+'px';f.el.style.top=f.y+'px';f.el.style.transform='translate(-50%,-50%) rotate('+Math.sin(f.phase*2)*12+'deg)'})}requestAnimationFrame(loop)}
+function updateHud(){waveLabel.textContent='파리 '+wave+'단계';scoreEl.textContent=score;missDotsEl.textContent=[0,1,2].map(i=>i<misses?'●':'○').join('');}
+function saveRecord(key,val){localStorage.setItem(key,String(val))}
+function getNum(key){return Number(localStorage.getItem(key)||0)}
+function recordKill(){saveRecord('pest_total_kills',getNum('pest_total_kills')+1)}
+function rememberProgress(){if(score>getNum('pest_best_score'))saveRecord('pest_best_score',score);if(wave>getNum('pest_best_wave'))saveRecord('pest_best_wave',wave)}
+function showBanner(text){banner.textContent=text;banner.animate([{transform:'translateX(-50%) scale(.84)',opacity:.2},{transform:'translateX(-50%) scale(1)',opacity:1}],{duration:220,fill:'forwards'});clearTimeout(showBanner._t);showBanner._t=setTimeout(()=>{banner.style.opacity='1'},200)}
+function stopTimer(){if(timerHandle){clearInterval(timerHandle);timerHandle=null}}
+function startTimer(){stopTimer();const sec=stageSeconds(wave);stageDeadline=performance.now()+sec*1000;timeLeftEl.textContent=sec.toFixed(1)+'s';timerHandle=setInterval(()=>{if(transitioning)return;const left=Math.max(0,(stageDeadline-performance.now())/1000);timeLeftEl.textContent=left.toFixed(1)+'s';if(left<=0){stopTimer();failStage('시간 안에 해충을 정리하지 못했어요.');}},100)}
+function bugHtml(no){return '<div class="wing l"></div><div class="wing r"></div><div class="antenna"></div><div class="leg"></div><div class="head"></div><div class="thorax"></div><div class="tail"></div><div class="eye l"></div><div class="eye r"></div><div class="bugNo">'+no+'</div>'}
+function spawn(count){flies.forEach(f=>f.el.remove());flies=[];misses=0;updateHud();overlay.style.display='none';transitioning=false;running=true;storyTag.textContent='1번부터 차례대로 박멸하세요';const r=bounds();for(let i=0;i<count;i++){const el=document.createElement('div');el.className='bug';el.innerHTML=bugHtml(i+1);game.appendChild(el);const angle=Math.random()*Math.PI*2;const speed=104+wave*11;flies.push({el,alive:true,no:i+1,x:48+Math.random()*(r.width-96),y:120+Math.random()*(r.height*0.49-120),vx:Math.cos(angle)*speed,vy:Math.sin(angle)*(speed*0.68),phase:Math.random()*Math.PI*2})}showBanner(count+'마리 출현!');startTimer();last=performance.now();if(!sessionStarted){saveRecord('pest_play_count',getNum('pest_play_count')+1);sessionStarted=true;}}
+function openResult(success,message){transitioning=true;running=false;stopTimer();overlay.style.display='flex';if(success){ovCard.classList.remove('fail');ovIcon.textContent='⭐';ovTitle.textContent='박멸 성공!';ovText.textContent=message;retryBtn.textContent='다음 단계';resetBtn.textContent='메인으로';}else{ovCard.classList.add('fail');ovIcon.textContent='💥';ovTitle.textContent='박멸 실패';ovText.textContent=message;retryBtn.textContent='다시 도전';resetBtn.textContent='처음부터';}}
+function nextWave(){rememberProgress();if(wave<MAX_WAVE){wave++;spawn(wave);}else{rememberProgress();openResult(true,'모든 파리 단계를 정리했어요.\n마을이 다시 조용해졌습니다!');}}
+function failStage(reason){rememberProgress();const retryWave=Math.max(1,wave-2);overlay.dataset.retryWave=String(retryWave);openResult(false,reason+'\n'+wave+'단계에서 실패하여 '+retryWave+'단계로 후퇴합니다.');}
+function fireFx(x,y,text){const flash=document.createElement('div');flash.className='hitFx';flash.style.left=x+'px';flash.style.top=y+'px';game.appendChild(flash);setTimeout(()=>flash.remove(),220);const t=document.createElement('div');t.className='hitText';t.style.left=x+'px';t.style.top=y+'px';t.textContent=text;game.appendChild(t);setTimeout(()=>t.remove(),520);rifle.classList.remove('kick','fire');void rifle.offsetWidth;rifle.classList.add('kick','fire');setTimeout(()=>rifle.classList.remove('fire'),130)}
+function shoot(x,y){if(transitioning||!running)return;const nearest=flies.filter(f=>f.alive).map(f=>({f,d:Math.hypot(f.x-x,f.y-y)})).sort((a,b)=>a.d-b.d)[0];if(nearest&&nearest.d<30){const need=expectedNo();if(nearest.f.no!==need){misses++;updateHud();storyTag.textContent=need+'번을 먼저 맞혀야 해요!';fireFx(x,y,'MISS');if(misses>=3)failStage('번호 순서를 놓쳤어요.');return;}nearest.f.alive=false;nearest.f.el.remove();score+=100*wave;recordKill();updateHud();storyTag.textContent='좋아요! 다음 번호를 노려보세요';fireFx(nearest.f.x,nearest.f.y,'HIT!');if(flies.every(f=>!f.alive))setTimeout(nextWave,320);}else{misses++;updateHud();storyTag.textContent='정확히 조준해보세요';fireFx(x,y,'MISS');if(misses>=3)failStage('MISS가 3회 누적되었어요.');}}
+function aimAt(x,y){cross.style.left=x+'px';cross.style.top=y+'px';const r=bounds();const ang=Math.atan2(x-r.width/2,Math.max(72,r.height-y))*18;rifle.style.setProperty('--ang', ang+'deg')}
+function loop(now){const dt=Math.min(0.03,(now-last)/1000);last=now;if(running){const r=bounds();flies.filter(f=>f.alive).forEach((f,i)=>{f.phase+=dt*(4.2+i*0.1);f.vx+=Math.sin(f.phase*1.8)*(14+wave*1.7)*dt;f.vy+=Math.cos(f.phase*2.0)*(13+wave*1.6)*dt;f.x+=f.vx*dt+Math.sin(f.phase)*(6+wave*0.55)*dt;f.y+=f.vy*dt+Math.cos(f.phase*1.18)*(5+wave*0.48)*dt;if(f.x<28||f.x>r.width-28)f.vx*=-1;if(f.y<110||f.y>r.height*0.53)f.vy*=-1;f.x=Math.max(28,Math.min(r.width-28,f.x));f.y=Math.max(110,Math.min(r.height*0.53,f.y));f.el.style.left=f.x+'px';f.el.style.top=f.y+'px';f.el.style.transform='translate(-50%,-50%) rotate('+Math.sin(f.phase*2.4)*10+'deg)';const flutter=1+Math.sin(f.phase*18)*0.08;const wings=f.el.querySelectorAll('.wing');wings[0].style.transform='rotate('+( -20 - flutter*20 )+'deg)';wings[1].style.transform='rotate('+( 20 + flutter*20 )+'deg)';})}requestAnimationFrame(loop)}
+
 game.addEventListener('pointermove',e=>{const r=bounds();aimAt(e.clientX-r.left,e.clientY-r.top)});
 game.addEventListener('pointerdown',e=>{if(e.target.closest('#backBtn')||e.target.closest('#overlay'))return;const r=bounds();shoot(e.clientX-r.left,e.clientY-r.top)});
 document.getElementById('backBtn').addEventListener('click',()=>{if(window.AppNav)AppNav.postMessage('back')});
-document.getElementById('retryBtn').addEventListener('click',()=>{wave=Number(overlay.dataset.retryWave||wave);spawn(wave)});
-document.getElementById('resetBtn').addEventListener('click',()=>{wave=1;score=0;misses=0;updateHud();spawn(1)});
-const r=bounds();aimAt(r.width/2,r.height*0.46);updateHud();spawn(1);requestAnimationFrame(loop);
+retryBtn.addEventListener('click',()=>{if(retryBtn.textContent==='다음 단계'){overlay.style.display='none';transitioning=false;running=true;spawn(Math.min(MAX_WAVE,wave));}else{wave=Number(overlay.dataset.retryWave||wave);spawn(wave);}});
+resetBtn.addEventListener('click',()=>{if(resetBtn.textContent==='메인으로'){if(window.AppNav){AppNav.postMessage('back');}else{wave=1;score=0;misses=0;sessionStarted=false;updateHud();spawn(1);}}else{wave=1;score=0;misses=0;sessionStarted=false;updateHud();spawn(1);}});
+const r=bounds();aimAt(r.width/2,r.height*0.44);updateHud();spawn(1);requestAnimationFrame(loop);
 </script>
 </body>
 </html>
