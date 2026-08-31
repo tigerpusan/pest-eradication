@@ -10,9 +10,8 @@ class PestEradicationApp extends StatelessWidget {
         title: '해충 박멸',
         theme: ThemeData(
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff2aa6ff)),
-          scaffoldBackgroundColor: const Color(0xffbfeaff),
-          fontFamily: null,
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff3fb0ff)),
+          scaffoldBackgroundColor: const Color(0xffdff4ff),
         ),
         home: const HomeScreen(),
       );
@@ -30,9 +29,9 @@ class HomeScreen extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xff92dcff),
-              Color(0xffdff7ff),
-              Color(0xfff7fff2),
+              Color(0xff9addff),
+              Color(0xffeefbff),
+              Color(0xfff6fbf2),
             ],
           ),
         ),
@@ -41,24 +40,24 @@ class HomeScreen extends StatelessWidget {
             children: [
               const _SkyDecor(),
               SingleChildScrollView(
-                padding: const EdgeInsets.fromLTRB(20, 18, 20, 24),
+                padding: const EdgeInsets.fromLTRB(20, 18, 20, 28),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const SizedBox(height: 10),
                     Center(
                       child: Container(
-                        width: 96,
-                        height: 96,
+                        width: 102,
+                        height: 102,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.white,
-                          border: Border.all(color: const Color(0xffff5d49), width: 6),
+                          border: Border.all(color: const Color(0xffff6e5a), width: 6),
                           boxShadow: const [
-                            BoxShadow(color: Color(0x44ff725e), blurRadius: 22, offset: Offset(0, 10)),
+                            BoxShadow(color: Color(0x33ff855e), blurRadius: 24, offset: Offset(0, 12)),
                           ],
                         ),
-                        child: const Icon(Icons.bug_report_rounded, size: 58, color: Color(0xff1f3142)),
+                        child: const Icon(Icons.pest_control_rodent_rounded, size: 58, color: Color(0xff18334d)),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -80,9 +79,9 @@ class HomeScreen extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 16,
-                          height: 1.4,
-                          fontWeight: FontWeight.w700,
-                          color: Color(0xff35556d),
+                          height: 1.45,
+                          fontWeight: FontWeight.w800,
+                          color: Color(0xff34586f),
                         ),
                       ),
                     ),
@@ -90,11 +89,11 @@ class HomeScreen extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.fromLTRB(18, 18, 18, 18),
                       decoration: BoxDecoration(
-                        color: const Color(0xeefeffff),
+                        color: const Color(0xf9ffffff),
                         borderRadius: BorderRadius.circular(26),
-                        border: Border.all(color: const Color(0x662aa6ff), width: 1.4),
+                        border: Border.all(color: const Color(0x803fb0ff), width: 1.4),
                         boxShadow: const [
-                          BoxShadow(color: Color(0x26005f8f), blurRadius: 18, offset: Offset(0, 10)),
+                          BoxShadow(color: Color(0x22005f8f), blurRadius: 20, offset: Offset(0, 12)),
                         ],
                       ),
                       child: const Column(
@@ -108,26 +107,48 @@ class HomeScreen extends StatelessWidget {
                           ),
                           SizedBox(height: 10),
                           Text(
-                            '가장 기본적인 파리부터 시작해, 점점 더 빠르고 교묘한 움직임을 보이는 해충들을 박멸하세요. 순서를 놓치면 실패합니다. 집중력과 반응속도로 끝까지 살아남으세요.',
-                            style: TextStyle(fontSize: 14.5, height: 1.55, color: Color(0xff49667c), fontWeight: FontWeight.w600),
+                            '파리부터 시작해 모기, 나방, 혼합형 웨이브까지 차례로 진행합니다. 해충마다 10단계씩 구성되며, 단계가 올라갈수록 속도와 움직임 패턴이 더 까다로워집니다. 순서를 놓치거나 MISS가 3회 누적되면 2단계 후퇴합니다.',
+                            style: TextStyle(fontSize: 14.5, height: 1.58, color: Color(0xff49667c), fontWeight: FontWeight.w600),
                           ),
                           SizedBox(height: 16),
                           Wrap(
                             spacing: 8,
                             runSpacing: 8,
                             children: [
-                              _MiniTag(text: '파리 1~10단계'),
+                              _MiniTag(text: '파리 10단계'),
+                              _MiniTag(text: '모기 10단계'),
+                              _MiniTag(text: '나방 10단계'),
+                              _MiniTag(text: '혼합 웨이브'),
                               _MiniTag(text: 'MISS 3회 실패'),
-                              _MiniTag(text: '2단계 후퇴'),
-                              _MiniTag(text: '즉시 터치 판정'),
+                              _MiniTag(text: '실패 시 2단계 후퇴'),
                             ],
                           ),
                         ],
                       ),
                     ),
+                    const SizedBox(height: 18),
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: const Color(0xddf4fcff),
+                        borderRadius: BorderRadius.circular(22),
+                        border: Border.all(color: const Color(0x664bb5ff)),
+                      ),
+                      child: const Row(
+                        children: [
+                          Expanded(child: _PhaseCard(title: '1', name: '파리', color: Color(0xffff8d76))),
+                          SizedBox(width: 8),
+                          Expanded(child: _PhaseCard(title: '2', name: '모기', color: Color(0xff44c0ff))),
+                          SizedBox(width: 8),
+                          Expanded(child: _PhaseCard(title: '3', name: '나방', color: Color(0xffffd15f))),
+                          SizedBox(width: 8),
+                          Expanded(child: _PhaseCard(title: '4', name: '혼합', color: Color(0xff5bd07f))),
+                        ],
+                      ),
+                    ),
                     const SizedBox(height: 22),
                     SizedBox(
-                      height: 62,
+                      height: 64,
                       child: FilledButton(
                         style: FilledButton.styleFrom(
                           backgroundColor: const Color(0xffffc928),
@@ -141,50 +162,16 @@ class HomeScreen extends StatelessWidget {
                         ),
                         child: const Text(
                           '박멸 시작',
-                          style: TextStyle(fontSize: 23, fontWeight: FontWeight.w900),
+                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
                         ),
                       ),
                     ),
                     const SizedBox(height: 14),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: OutlinedButton.icon(
-                            style: OutlinedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              backgroundColor: const Color(0xccffffff),
-                              foregroundColor: const Color(0xff20415a),
-                              side: const BorderSide(color: Color(0x663f9fe3), width: 1.2),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                            ),
-                            onPressed: () => _showInfo(context, '해충 도감', "현재 오픈된 해충\n\n• 기본 파리\n\n다음 패치 예고\n• 모기\n• 초파리\n\n해충별 특징과 출현 지역, 위험도 정보가 여기에 정리됩니다."),
-                            icon: const Icon(Icons.menu_book_rounded),
-                            label: const Text('도감', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800)),
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: OutlinedButton.icon(
-                            style: OutlinedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              backgroundColor: const Color(0xccffffff),
-                              foregroundColor: const Color(0xff20415a),
-                              side: const BorderSide(color: Color(0x663f9fe3), width: 1.2),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                            ),
-                            onPressed: () => _showInfo(context, '기록', "기본 포맷 안내\n\n• 최고 단계\n• 최고 점수\n• 총 박멸 수\n• 연속 명중 기록\n\n실제 기록 저장은 플레이 데이터 확장 패치에서 강화됩니다."),
-                            icon: const Icon(Icons.emoji_events_rounded),
-                            label: const Text('기록', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800)),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 18),
                     const Center(
                       child: Text(
-                        '밝은 캐주얼 패치 V0.1.4 · 파리 기본 스테이지 집중 버전',
+                        '파리 → 모기 → 나방 → 혼합형으로 이어지는 단계별 반응속도 게임',
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 13.5, color: Color(0xff5e7c91), fontWeight: FontWeight.w700),
+                        style: TextStyle(fontSize: 13.5, color: Color(0xff5c7e93), fontWeight: FontWeight.w700),
                       ),
                     ),
                   ],
@@ -193,28 +180,6 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  static void _showInfo(BuildContext context, String title, String body) {
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        backgroundColor: const Color(0xfff8fdff),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-        title: Text(title, style: const TextStyle(fontWeight: FontWeight.w900, color: Color(0xff173650))),
-        content: Text(body, style: const TextStyle(height: 1.55, color: Color(0xff4b6678), fontWeight: FontWeight.w600)),
-        actions: [
-          FilledButton(
-            style: FilledButton.styleFrom(
-              backgroundColor: const Color(0xffffc928),
-              foregroundColor: const Color(0xff172028),
-            ),
-            onPressed: () => Navigator.pop(context),
-            child: const Text('확인', style: TextStyle(fontWeight: FontWeight.w900)),
-          ),
-        ],
       ),
     );
   }
@@ -266,11 +231,45 @@ class _MiniTag extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-        color: const Color(0xffeaf8ff),
+        color: const Color(0xffecf8ff),
         borderRadius: BorderRadius.circular(999),
         border: Border.all(color: const Color(0x663f9fe3)),
       ),
       child: Text(text, style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w800, color: Color(0xff1e5a78))),
+    );
+  }
+}
+
+class _PhaseCard extends StatelessWidget {
+  final String title;
+  final String name;
+  final Color color;
+  const _PhaseCard({required this.title, required this.name, required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: color.withOpacity(.7), width: 1.5),
+      ),
+      child: Column(
+        children: [
+          Container(
+            width: 26,
+            height: 26,
+            decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+            alignment: Alignment.center,
+            child: Text(title, style: const TextStyle(fontWeight: FontWeight.w900, color: Colors.white)),
+          ),
+          const SizedBox(height: 8),
+          Text(name, style: const TextStyle(fontSize: 14.5, fontWeight: FontWeight.w900, color: Color(0xff173650))),
+          const SizedBox(height: 2),
+          const Text('10단계', style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w700, color: Color(0xff678094))),
+        ],
+      ),
     );
   }
 }
@@ -284,58 +283,41 @@ class _SkyDecor extends StatelessWidget {
       child: Stack(
         children: [
           Positioned(
-            top: 36,
-            right: -40,
+            top: 34,
+            right: -34,
             child: Container(
               width: 180,
               height: 180,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Color(0x55ffffff),
-              ),
+              decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0x46ffffff)),
             ),
           ),
           Positioned(
-            top: 140,
-            left: -20,
+            top: 132,
+            left: -18,
             child: Container(
-              width: 110,
-              height: 110,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Color(0x33ffffff),
-              ),
+              width: 114,
+              height: 114,
+              decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0x30ffffff)),
             ),
           ),
           Positioned(
-            top: 110,
+            top: 102,
             left: 26,
             child: Container(
-              width: 128,
+              width: 134,
               height: 48,
-              decoration: BoxDecoration(
-                color: const Color(0x8fffffff),
-                borderRadius: BorderRadius.circular(40),
-              ),
+              decoration: BoxDecoration(color: const Color(0x82ffffff), borderRadius: BorderRadius.circular(40)),
             ),
           ),
           Positioned(
-            top: 92,
+            top: 84,
             left: 54,
-            child: Container(
-              width: 52,
-              height: 52,
-              decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0x8fffffff)),
-            ),
+            child: Container(width: 54, height: 54, decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0x82ffffff))),
           ),
           Positioned(
-            top: 98,
+            top: 90,
             left: 94,
-            child: Container(
-              width: 60,
-              height: 60,
-              decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0x8fffffff)),
-            ),
+            child: Container(width: 62, height: 62, decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0x82ffffff))),
           ),
         ],
       ),

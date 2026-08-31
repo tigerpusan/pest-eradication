@@ -3,118 +3,82 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>해충 박멸 V0.1.4</title>
+<title>해충 박멸 V0.1.5</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;height:100%;overflow:hidden;font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;touch-action:none;background:#8edcff}
-:root{--hudH:52px}
-#game{position:relative;height:100%;overflow:hidden;background:linear-gradient(180deg,#7fd6ff 0%,#d8f4ff 42%,#dff7ff 54%,#87d36a 55%,#67ba4c 74%,#4d9d43 100%)}
-#sun{position:absolute;left:50%;top:120px;width:170px;height:170px;transform:translateX(-50%);background:radial-gradient(circle,#fffde8 0%,#fff4b8 22%,rgba(255,255,255,0) 65%);opacity:.9;filter:blur(2px);z-index:0}
+#game{position:relative;height:100%;overflow:hidden;background:linear-gradient(180deg,#7ed6ff 0%,#d8f5ff 43%,#e3fbff 58%,#84d15b 59%,#68bf49 100%)}
+#sun{position:absolute;left:50%;top:116px;width:184px;height:184px;transform:translateX(-50%);background:radial-gradient(circle,#fffce2 0%,#fff0aa 20%,rgba(255,255,255,0) 66%);opacity:.9;z-index:0}
 .cloud{position:absolute;z-index:1;background:rgba(255,255,255,.84);border-radius:999px;box-shadow:0 4px 10px rgba(255,255,255,.18)}
-.cloud:before,.cloud:after{content:"";position:absolute;border-radius:50%;background:inherit}
-.cloud:before{width:44%;height:130%;left:12%;top:-45%}
-.cloud:after{width:38%;height:105%;right:14%;top:-26%}
-.c1{top:88px;left:24px;width:140px;height:40px}.c2{top:160px;right:16px;width:120px;height:34px}.c3{top:240px;left:-20px;width:160px;height:46px;opacity:.62}
-.hillBack{position:absolute;left:-5%;right:-5%;bottom:27%;height:110px;background:linear-gradient(180deg,#88cc68,#68b254);border-radius:55% 55% 0 0 / 100% 100% 0 0;z-index:1;opacity:.72}
-.village{position:absolute;left:0;right:0;bottom:30%;height:90px;z-index:2;opacity:.35}
-.house{position:absolute;bottom:0;width:68px;height:52px;background:#8ab0be;border-radius:12px 12px 0 0}
-.house:before{content:"";position:absolute;left:8px;right:8px;top:-22px;height:26px;background:#7396a3;clip-path:polygon(50% 0,0 100%,100% 100%)}
-.house:after{content:"";position:absolute;left:12px;top:16px;width:12px;height:16px;background:#fff6a7;box-shadow:18px 0 0 #fff6a7,36px 0 0 #fff6a7}
-.h1{left:14px}.h2{left:110px;transform:scale(.88)}.h3{right:118px;transform:scale(1.05)}.h4{right:20px;transform:scale(.9)}
-#grassFront{position:absolute;left:0;right:0;bottom:0;height:33%;background:linear-gradient(180deg,#75c652,#4ba042 100%);z-index:2}
-#grassFront:before{content:"";position:absolute;left:-5%;right:-5%;top:-18px;height:36px;background:#95da72;border-radius:50% 50% 0 0 / 100% 100% 0 0}
-#hud{position:absolute;left:10px;right:10px;top:10px;height:var(--hudH);display:grid;grid-template-columns:46px 1.3fr 1fr .85fr .85fr;gap:7px;z-index:30}
-.hudCell{height:100%;display:flex;align-items:center;justify-content:center;background:rgba(16,73,108,.88);color:#fff;border:2px solid rgba(255,255,255,.22);border-radius:16px;box-shadow:0 10px 18px rgba(3,38,60,.18)}
-#backBtn{font-size:34px;font-weight:900;line-height:1;border:none}
-.hudStat{flex-direction:column;gap:1px;padding-top:5px;overflow:hidden}
-.hudStat .label{font-size:10px;font-weight:900;letter-spacing:.4px;color:#d2ecff;line-height:1}
-.hudStat .value{font-size:clamp(12px,3vw,18px);font-weight:1000;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#timeWrap .value{color:#ffe56b}
-#missWrap .value{font-size:15px;letter-spacing:1px}
-#scoreWrap .value{font-size:17px}
-#banner{position:absolute;left:50%;top:72px;transform:translateX(-50%);z-index:28;background:#fff3a3;color:#5a4200;padding:8px 16px;border-radius:999px;font-weight:1000;font-size:16px;box-shadow:0 8px 18px rgba(94,76,0,.18)}
-#storyTag{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:20;min-width:238px;max-width:88%;padding:11px 18px;text-align:center;background:rgba(10,70,99,.9);color:#fff;border:2px solid rgba(255,255,255,.18);border-radius:20px;box-shadow:0 10px 16px rgba(6,37,54,.2);font-size:14px;font-weight:900}
-#cross{position:absolute;z-index:18;width:50px;height:50px;border:3px solid #ff5a4f;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;box-shadow:0 0 0 4px rgba(255,255,255,.18)}
-#cross:before,#cross:after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#ff5a4f}
-#cross:before{width:68px;height:3px}#cross:after{width:3px;height:68px}
+.cloud:before,.cloud:after{content:"";position:absolute;border-radius:50%;background:inherit}.cloud:before{width:44%;height:130%;left:12%;top:-45%}.cloud:after{width:38%;height:105%;right:14%;top:-26%}
+.c1{top:90px;left:28px;width:144px;height:42px}.c2{top:174px;right:22px;width:122px;height:36px}.c3{top:248px;left:-22px;width:164px;height:46px;opacity:.62}
+#hud{position:absolute;left:10px;right:10px;top:10px;display:grid;grid-template-columns:1.5fr 1.15fr .95fr .95fr;gap:7px;z-index:40}
+.hudCell{min-height:58px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(30,80,117,.92),rgba(24,63,93,.95));color:#fff;border:2px solid rgba(255,255,255,.22);border-radius:18px;box-shadow:0 10px 18px rgba(6,36,54,.18)}
+.hudStat{flex-direction:column;padding:8px 8px 7px;gap:2px;overflow:hidden}
+.hudStat .label{font-size:10px;font-weight:1000;letter-spacing:.7px;color:#d1ecff;line-height:1}
+.hudStat .value{font-size:clamp(14px,3.8vw,20px);font-weight:1000;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#timeWrap .value{color:#ffe56b}#scoreWrap .value{font-size:clamp(18px,4.4vw,28px)}
+#banner{position:absolute;left:50%;top:84px;transform:translateX(-50%);z-index:36;background:#ffef99;color:#5c4500;padding:10px 18px;border-radius:999px;font-weight:1000;font-size:16px;box-shadow:0 10px 18px rgba(94,76,0,.18)}
+#message{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);z-index:30;min-width:250px;max-width:88%;padding:12px 18px;text-align:center;background:rgba(14,76,109,.92);color:#fff;border:2px solid rgba(255,255,255,.16);border-radius:22px;box-shadow:0 10px 16px rgba(6,37,54,.2);font-size:14px;font-weight:900}
+#cross{position:absolute;z-index:24;width:52px;height:52px;border:3px solid #ff5a4f;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;box-shadow:0 0 0 4px rgba(255,255,255,.18)}
+#cross:before,#cross:after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#ff5a4f}#cross:before{width:72px;height:3px}#cross:after{width:3px;height:72px}
 #cross .dot{position:absolute;left:50%;top:50%;width:7px;height:7px;transform:translate(-50%,-50%);border-radius:50%;background:#ff5a4f}
-#rifle{--ang:0deg;position:absolute;z-index:16;left:50%;bottom:-2px;width:160px;height:245px;transform:translateX(-50%) rotate(var(--ang));transform-origin:50% 100%;pointer-events:none;filter:drop-shadow(0 10px 12px rgba(0,0,0,.24))}
-#rifle.kick{animation:kick .13s ease-out}
-@keyframes kick{0%,100%{transform:translateX(-50%) rotate(var(--ang))}50%{transform:translateX(-50%) translateY(10px) rotate(calc(var(--ang) + 1.6deg))}}
-#rifle .barrel{position:absolute;left:71px;top:12px;width:18px;height:148px;border-radius:10px;background:linear-gradient(90deg,#111,#7f8c96 34%,#272c31 68%,#111);border:2px solid rgba(255,255,255,.22)}
-#rifle .muzzle{position:absolute;left:65px;top:0;width:30px;height:18px;background:#20262b;border-radius:50%;border:4px solid #5a6973}
-#rifle .pump{position:absolute;left:56px;top:105px;width:46px;height:34px;background:linear-gradient(135deg,#8d6137,#5e3b1f);border-radius:10px;border:3px solid #5a3316}
-#rifle .stock{position:absolute;left:46px;top:144px;width:64px;height:86px;background:linear-gradient(135deg,#9c6840,#5a341c);border:4px solid #442412;border-radius:16px 18px 20px 22px;transform:rotate(-8deg)}
-#rifle .trigger{position:absolute;left:62px;top:145px;width:24px;height:28px;border:4px solid #263138;border-top:0;border-radius:0 0 16px 16px}
-#rifle .flash{position:absolute;left:51px;top:-16px;width:58px;height:58px;border-radius:50%;background:radial-gradient(circle,#fff7a4 0%,#ffc72e 24%,rgba(255,160,0,.16) 56%,rgba(255,160,0,0) 72%);opacity:0;transform:scale(.4)}
-#rifle.fire .flash{animation:flash .12s ease-out}
-@keyframes flash{0%{opacity:0;transform:scale(.4)}30%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.3)}}
-.bug{position:absolute;z-index:12;width:58px;height:46px;transform:translate(-50%,-50%);filter:drop-shadow(0 5px 6px rgba(0,0,0,.16))}
-.bug .wing{position:absolute;top:10px;width:22px;height:16px;background:linear-gradient(135deg,rgba(255,255,255,.95),rgba(193,233,255,.48));border:2px solid rgba(130,177,204,.65);border-radius:55% 55% 70% 70%}
-.bug .wing.l{left:4px;transform:rotate(-20deg)} .bug .wing.r{right:4px;transform:rotate(20deg)}
-.bug .head{position:absolute;left:19px;top:10px;width:16px;height:16px;border-radius:50%;background:#2f3d46}
-.bug .thorax{position:absolute;left:16px;top:17px;width:22px;height:15px;border-radius:12px;background:linear-gradient(180deg,#374852,#1f2a31)}
-.bug .tail{position:absolute;left:18px;top:26px;width:18px;height:14px;border-radius:40% 40% 55% 55%;background:linear-gradient(180deg,#4d5d66,#25323a)}
-.bug .eye{position:absolute;top:12px;width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffd1c7 0%,#ff9574 34%,#ff5b4e 65%,#8e2a1d 100%);box-shadow:0 0 0 1px rgba(255,255,255,.25)}
-.bug .eye.l{left:14px}.bug .eye.r{right:14px}
-.bug .antenna:before,.bug .antenna:after{content:"";position:absolute;top:8px;width:10px;height:2px;background:#1d2830;border-radius:999px}
-.bug .antenna:before{left:18px;transform:rotate(-30deg)}.bug .antenna:after{right:18px;transform:rotate(30deg)}
-.bug .leg:before,.bug .leg:after{content:"";position:absolute;top:28px;width:12px;height:2px;background:#2d3940;box-shadow:0 6px 0 #2d3940}
-.bug .leg:before{left:6px;transform:rotate(18deg)} .bug .leg:after{right:6px;transform:rotate(-18deg)}
-.bugNo{position:absolute;left:50%;top:23px;transform:translateX(-50%);min-width:20px;height:20px;padding:0 4px;border-radius:50%;background:#fff;color:#173650;border:2px solid #ff6a4f;font-size:12px;line-height:16px;text-align:center;font-weight:1000;box-shadow:0 2px 4px rgba(0,0,0,.18)}
-.hitFx{position:absolute;z-index:40;width:18px;height:18px;transform:translate(-50%,-50%);pointer-events:none}
-.hitFx:before,.hitFx:after{content:"";position:absolute;inset:0;background:radial-gradient(circle,#fff9c4 0%,#ffd54a 38%,rgba(255,182,46,.42) 60%,rgba(255,182,46,0) 76%)}
-.hitFx:after{transform:rotate(45deg)}
-.hitFx{animation:burst .18s ease-out forwards}
-@keyframes burst{to{opacity:0;transform:translate(-50%,-50%) scale(2.6)}}
-.hitText{position:absolute;z-index:41;color:#fff;font-weight:1000;text-shadow:0 2px 4px rgba(0,0,0,.25);transform:translate(-50%,-50%);pointer-events:none;animation:floatUp .5s ease-out forwards}
-@keyframes floatUp{to{opacity:0;transform:translate(-50%,-95%) scale(1.08)}}
-#overlay{position:absolute;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(9,43,61,.36);backdrop-filter:blur(4px)}
-.card{width:100%;max-width:360px;border-radius:28px;padding:24px 20px 20px;text-align:center;color:#18334a;background:linear-gradient(180deg,#ffffff,#eef9ff);border:2px solid rgba(255,255,255,.95);box-shadow:0 20px 38px rgba(0,39,60,.22)}
-.card.fail{background:linear-gradient(180deg,#fff7f4,#ffe8e4)}
-.card h2{margin:0 0 8px;font-size:30px;font-weight:1000}
-.card p{margin:10px 0 0;white-space:pre-line;line-height:1.55;font-weight:700;color:#4e6475}
-#ovIcon{font-size:46px;line-height:1;margin-bottom:8px}
-.actions{display:flex;gap:10px;margin-top:18px}
-.actions button{flex:1;border:none;border-radius:16px;padding:14px 10px;font-size:16px;font-weight:1000}
-.primary{background:#ffd13f;color:#3b2b00}.secondary{background:#0e6ba0;color:#fff}
-@media (max-width:390px){#hud{grid-template-columns:42px 1.2fr .95fr .82fr .82fr;gap:5px} .hudStat .value{font-size:12px} .hudStat .label{font-size:9px} #storyTag{font-size:13px;min-width:210px} }
+.horizon{position:absolute;left:-6%;right:-6%;bottom:24%;height:120px;background:linear-gradient(180deg,#8fd66f,#70bc55);border-radius:55% 55% 0 0 / 100% 100% 0 0;z-index:2;opacity:.75}
+.village{position:absolute;left:0;right:0;bottom:21%;height:130px;z-index:3;opacity:.32}
+.house{position:absolute;bottom:8px;width:70px;height:54px;background:#90b9a4;border-radius:12px 12px 0 0}.house:before{content:"";position:absolute;left:8px;right:8px;top:-22px;height:26px;background:#7ba489;clip-path:polygon(50% 0,0 100%,100% 100%)}
+.h1{left:26px}.h2{left:132px;transform:scale(.86)}.h3{right:138px;transform:scale(1.02)}.h4{right:26px;transform:scale(.88)}
+#grass{position:absolute;left:0;right:0;bottom:0;height:37%;background:linear-gradient(180deg,#77cb53,#4ea444 100%);z-index:2}#grass:before{content:"";position:absolute;left:-5%;right:-5%;top:-18px;height:42px;background:#9bdd78;border-radius:50% 50% 0 0 / 100% 100% 0 0}
+#rifle{--ang:0deg;position:absolute;z-index:22;left:50%;bottom:-2px;width:192px;height:286px;transform:translateX(-50%) rotate(var(--ang));transform-origin:50% 100%;pointer-events:none;filter:drop-shadow(0 12px 14px rgba(0,0,0,.24))}
+#rifle.kick{animation:kick .12s ease-out}@keyframes kick{0%,100%{transform:translateX(-50%) rotate(var(--ang))}50%{transform:translateX(-50%) translateY(8px) rotate(calc(var(--ang) + 1.6deg))}}
+#rifle .barrel{position:absolute;left:86px;top:6px;width:20px;height:174px;border-radius:12px;background:linear-gradient(90deg,#0d1114,#828d99 30%,#2a2f34 64%,#0d1114 100%);border:2px solid rgba(255,255,255,.22)}
+#rifle .muzzle{position:absolute;left:79px;top:-2px;width:34px;height:18px;background:#1c2328;border-radius:12px;border:4px solid #697682}
+#rifle .frontSight{position:absolute;left:93px;top:10px;width:8px;height:18px;background:#181d20;border-radius:4px}
+#rifle .receiver{position:absolute;left:72px;top:130px;width:48px;height:64px;border-radius:18px;background:linear-gradient(180deg,#242a31,#111519);border:2px solid #68727d}
+#rifle .stock{position:absolute;left:63px;top:176px;width:72px;height:108px;background:linear-gradient(135deg,#b3723f,#6c401e);border:5px solid #5a3117;border-radius:18px 18px 26px 24px;transform:rotate(-7deg)}
+#rifle .grip{position:absolute;left:81px;top:155px;width:40px;height:64px;background:linear-gradient(135deg,#9f6539,#653719);border:4px solid #4e2a12;border-radius:16px;transform:rotate(8deg)}
+#rifle .triggerGuard{position:absolute;left:82px;top:182px;width:30px;height:38px;border:5px solid #243038;border-top:0;border-radius:0 0 20px 20px}
+#rifle .flash{position:absolute;left:61px;top:-18px;width:72px;height:72px;border-radius:50%;background:radial-gradient(circle,#fffbc4 0%,#ffd34f 28%,rgba(255,180,50,.24) 54%,rgba(255,180,50,0) 72%);opacity:0;transform:scale(.4)}
+#rifle.fire .flash{animation:flash .12s ease-out}@keyframes flash{0%{opacity:0;transform:scale(.4)}30%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.35)}}
+.pest{position:absolute;z-index:16;transform:translate(-50%,-50%);filter:drop-shadow(0 6px 7px rgba(0,0,0,.16))}
+.pest .no{position:absolute;left:50%;top:50%;transform:translate(-50%,-34%);min-width:19px;height:19px;padding:0 4px;border-radius:50%;background:#fff;border:2px solid #ff6b54;color:#173650;font-size:12px;line-height:15px;font-weight:1000;text-align:center}
+.pest.fly{width:54px;height:44px}.pest.fly .wing{position:absolute;top:7px;width:18px;height:16px;background:linear-gradient(135deg,rgba(255,255,255,.95),rgba(196,233,255,.45));border:2px solid rgba(130,177,204,.65);border-radius:58% 58% 68% 68%}.pest.fly .wing.l{left:6px;transform:rotate(-22deg)}.pest.fly .wing.r{right:6px;transform:rotate(22deg)}.pest.fly .head{position:absolute;left:19px;top:7px;width:16px;height:16px;border-radius:50%;background:linear-gradient(180deg,#34444f,#243139)}.pest.fly .body{position:absolute;left:16px;top:16px;width:22px;height:18px;border-radius:50% 50% 58% 58%;background:linear-gradient(180deg,#3b4d57,#212b33)}.pest.fly .tail{position:absolute;left:18px;top:28px;width:18px;height:10px;border-radius:0 0 12px 12px;background:linear-gradient(180deg,#64747f,#2b3840)}.pest.fly .eye{position:absolute;top:8px;width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffd9d2 0%,#ff9e82 35%,#ff624f 70%,#922b1d 100%)}.pest.fly .eye.l{left:13px}.pest.fly .eye.r{right:13px}.pest.fly .leg{position:absolute;left:0;right:0;top:25px;height:14px}.pest.fly .leg:before,.pest.fly .leg:after{content:"";position:absolute;width:13px;height:2px;background:#2d3940;box-shadow:0 7px 0 #2d3940}.pest.fly .leg:before{left:6px;transform:rotate(18deg)}.pest.fly .leg:after{right:6px;transform:rotate(-18deg)}.pest.fly .antenna:before,.pest.fly .antenna:after{content:"";position:absolute;top:6px;width:9px;height:2px;background:#1d2830;border-radius:999px}.pest.fly .antenna:before{left:18px;transform:rotate(-28deg)}.pest.fly .antenna:after{right:18px;transform:rotate(28deg)}
+.pest.mosquito{width:56px;height:36px}.pest.mosquito .wing{position:absolute;top:3px;width:24px;height:11px;background:linear-gradient(135deg,rgba(255,255,255,.95),rgba(197,233,255,.34));border:2px solid rgba(124,175,207,.62);border-radius:60% 60% 70% 70%}.pest.mosquito .wing.l{left:2px;transform:rotate(-26deg)}.pest.mosquito .wing.r{right:2px;transform:rotate(26deg)}.pest.mosquito .body{position:absolute;left:22px;top:7px;width:10px;height:20px;border-radius:10px;background:linear-gradient(180deg,#36434c,#1e2b31)}.pest.mosquito .tail{position:absolute;left:24px;top:20px;width:6px;height:12px;border-radius:0 0 8px 8px;background:#667a86}.pest.mosquito .head{position:absolute;left:19px;top:2px;width:16px;height:12px;border-radius:50%;background:linear-gradient(180deg,#36454f,#25333b)}.pest.mosquito .eye{position:absolute;top:4px;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ffd9d2 0%,#ff9e82 35%,#ff624f 70%,#922b1d 100%)}.pest.mosquito .eye.l{left:16px}.pest.mosquito .eye.r{right:16px}.pest.mosquito .leg{position:absolute;left:0;right:0;top:15px;height:16px}.pest.mosquito .leg:before,.pest.mosquito .leg:after{content:"";position:absolute;width:18px;height:1.8px;background:#2f3940;box-shadow:0 5px 0 #2f3940, 0 10px 0 #2f3940}.pest.mosquito .leg:before{left:3px;transform:rotate(24deg)}.pest.mosquito .leg:after{right:3px;transform:rotate(-24deg)}.pest.mosquito .beak{position:absolute;left:26px;top:-8px;width:2px;height:14px;background:#28353c;border-radius:2px}.pest.mosquito .no{top:53%;min-width:18px;height:18px;font-size:11px;line-height:14px}
+.pest.moth{width:66px;height:48px}.pest.moth .wing{position:absolute;top:8px;width:28px;height:26px;background:linear-gradient(180deg,#fff1c4,#e7c979);border:2px solid rgba(184,141,66,.9);border-radius:58% 42% 58% 42%}.pest.moth .wing.l{left:3px;transform:rotate(-24deg)}.pest.moth .wing.r{right:3px;transform:scaleX(-1) rotate(-24deg)}.pest.moth .wing:after{content:"";position:absolute;inset:5px;border-radius:inherit;border:1px solid rgba(164,112,44,.45)}.pest.moth .body{position:absolute;left:28px;top:12px;width:12px;height:24px;border-radius:10px;background:linear-gradient(180deg,#6a5e4b,#433426)}.pest.moth .head{position:absolute;left:25px;top:7px;width:18px;height:12px;border-radius:50%;background:linear-gradient(180deg,#7f725d,#594735)}.pest.moth .eye{position:absolute;top:9px;width:6px;height:6px;border-radius:50%;background:#6f2f22}.pest.moth .eye.l{left:23px}.pest.moth .eye.r{right:23px}.pest.moth .antenna:before,.pest.moth .antenna:after{content:"";position:absolute;top:4px;width:11px;height:2px;background:#5c4d3d}.pest.moth .antenna:before{left:20px;transform:rotate(-28deg)}.pest.moth .antenna:after{right:20px;transform:rotate(28deg)}.pest.moth .leg{position:absolute;left:0;right:0;top:28px;height:10px}.pest.moth .leg:before,.pest.moth .leg:after{content:"";position:absolute;width:12px;height:2px;background:#5a4d3d}.pest.moth .leg:before{left:18px;transform:rotate(18deg)}.pest.moth .leg:after{right:18px;transform:rotate(-18deg)}.pest.moth .no{top:54%;min-width:20px;height:20px}
+.hitFx{position:absolute;z-index:45;width:18px;height:18px;transform:translate(-50%,-50%);pointer-events:none}.hitFx:before,.hitFx:after{content:"";position:absolute;inset:0;background:radial-gradient(circle,#fff9c4 0%,#ffd54a 38%,rgba(255,182,46,.42) 60%,rgba(255,182,46,0) 76%)}.hitFx:after{transform:rotate(45deg)}.hitFx{animation:burst .18s ease-out forwards}@keyframes burst{to{opacity:0;transform:translate(-50%,-50%) scale(2.8)}}
+.hitText{position:absolute;z-index:46;color:#fff;font-weight:1000;text-shadow:0 2px 4px rgba(0,0,0,.25);transform:translate(-50%,-50%);pointer-events:none;animation:floatUp .55s ease-out forwards}@keyframes floatUp{to{opacity:0;transform:translate(-50%,-95%) scale(1.08)}}
+#overlay{position:absolute;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(9,43,61,.36);backdrop-filter:blur(4px)}
+.card{width:100%;max-width:360px;border-radius:28px;padding:24px 20px 20px;text-align:center;color:#18334a;background:linear-gradient(180deg,#ffffff,#eef9ff);border:2px solid rgba(255,255,255,.95);box-shadow:0 20px 38px rgba(0,39,60,.22)}.card.fail{background:linear-gradient(180deg,#fff7f4,#ffe8e4)}.card h2{margin:0 0 8px;font-size:30px;font-weight:1000}.card p{margin:10px 0 0;white-space:pre-line;line-height:1.55;font-weight:700;color:#4e6475}#ovIcon{font-size:46px;line-height:1;margin-bottom:8px}.actions{display:flex;gap:10px;margin-top:18px}.actions button{flex:1;border:none;border-radius:16px;padding:14px 10px;font-size:16px;font-weight:1000}.primary{background:#ffd13f;color:#3b2b00}.secondary{background:#0e6ba0;color:#fff}
+@media (max-width:390px){#hud{gap:5px} .hudStat .value{font-size:12px} .hudStat .label{font-size:9px} #message{font-size:13px;min-width:210px}}
 </style>
 </head>
 <body>
 <div id="game">
   <div id="sun"></div>
   <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
-  <div class="hillBack"></div>
+  <div class="horizon"></div>
   <div class="village"><div class="house h1"></div><div class="house h2"></div><div class="house h3"></div><div class="house h4"></div></div>
-  <div id="grassFront"></div>
-
+  <div id="grass"></div>
   <div id="hud">
-    <button id="backBtn" class="hudCell">‹</button>
-    <div id="stageWrap" class="hudCell hudStat"><span class="label">STAGE</span><span class="value" id="waveLabel">파리 1단계</span></div>
+    <div id="stageWrap" class="hudCell hudStat"><span class="label">WAVE</span><span class="value" id="waveLabel">파리 1단계</span></div>
     <div id="scoreWrap" class="hudCell hudStat"><span class="label">SCORE</span><span class="value" id="score">0</span></div>
     <div id="missWrap" class="hudCell hudStat"><span class="label">MISS</span><span class="value" id="missDots">○○○</span></div>
     <div id="timeWrap" class="hudCell hudStat"><span class="label">TIME</span><span class="value" id="timeLeft">10.0s</span></div>
   </div>
   <div id="banner">1마리 출현!</div>
   <div id="cross"><span class="dot"></span></div>
-  <div id="rifle">
-    <div class="flash"></div><div class="muzzle"></div><div class="barrel"></div><div class="pump"></div><div class="stock"></div><div class="trigger"></div>
-  </div>
-  <div id="storyTag">1번부터 차례대로 박멸하세요</div>
-  <div id="overlay">
-    <div class="card" id="ovCard">
-      <div id="ovIcon">⭐</div>
-      <h2 id="ovTitle">박멸 성공!</h2>
-      <p id="ovText">다음 해충 떼가 감지되었습니다.</p>
-      <div class="actions">
-        <button class="primary" id="retryBtn">다시 도전</button>
-        <button class="secondary" id="resetBtn">처음부터</button>
-      </div>
-    </div>
-  </div>
+  <div id="rifle"><div class="flash"></div><div class="muzzle"></div><div class="frontSight"></div><div class="barrel"></div><div class="receiver"></div><div class="grip"></div><div class="triggerGuard"></div><div class="stock"></div></div>
+  <div id="message">1번부터 차례대로 박멸하세요</div>
+  <div id="overlay"><div class="card" id="ovCard"><div id="ovIcon">⭐</div><h2 id="ovTitle">박멸 성공!</h2><p id="ovText">다음 해충 떼가 감지되었습니다.</p><div class="actions"><button class="primary" id="retryBtn">다음 단계</button><button class="secondary" id="resetBtn">처음부터</button></div></div></div>
 </div>
 <script>
+const ACTS=[
+  {name:'파리', key:'fly', color:'#ff8d76'},
+  {name:'모기', key:'mosquito', color:'#5bc8ff'},
+  {name:'나방', key:'moth', color:'#ffd36f'},
+  {name:'혼합', key:'mixed', color:'#69d77f'}
+];
+const STAGES_PER_ACT=10;
+const TOTAL_STAGES=ACTS.length*STAGES_PER_ACT;
 const game=document.getElementById('game');
 const cross=document.getElementById('cross');
 const rifle=document.getElementById('rifle');
@@ -128,40 +92,69 @@ const waveLabel=document.getElementById('waveLabel');
 const timeLeftEl=document.getElementById('timeLeft');
 const missDotsEl=document.getElementById('missDots');
 const banner=document.getElementById('banner');
-const storyTag=document.getElementById('storyTag');
+const messageEl=document.getElementById('message');
 const retryBtn=document.getElementById('retryBtn');
 const resetBtn=document.getElementById('resetBtn');
+let wave=1, score=0, misses=0, pests=[], transitioning=false, running=true, last=performance.now(), timerHandle=null, stageDeadline=0, sessionStarted=false;
+let audioCtx=null;
+function ensureAudio(){ if(!audioCtx){ const C=window.AudioContext||window.webkitAudioContext; if(C) audioCtx=new C(); } if(audioCtx && audioCtx.state==='suspended') audioCtx.resume(); }
+function ping(freq,dur,type='square',gain=.03,start=0){ if(!audioCtx) return; const t=audioCtx.currentTime+start; const o=audioCtx.createOscillator(); const g=audioCtx.createGain(); o.type=type; o.frequency.setValueAtTime(freq,t); g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(gain,t+.01); g.gain.exponentialRampToValueAtTime(.0001,t+dur); o.connect(g); g.connect(audioCtx.destination); o.start(t); o.stop(t+dur+.02); }
+function noiseBurst(dur=.08,gain=.018,start=0){ if(!audioCtx) return; const buffer=audioCtx.createBuffer(1, audioCtx.sampleRate*dur, audioCtx.sampleRate); const data=buffer.getChannelData(0); for(let i=0;i<data.length;i++) data[i]=(Math.random()*2-1)*(1-i/data.length); const src=audioCtx.createBufferSource(); src.buffer=buffer; const g=audioCtx.createGain(); const t=audioCtx.currentTime+start; g.gain.setValueAtTime(gain,t); g.gain.exponentialRampToValueAtTime(.0001,t+dur); src.connect(g); g.connect(audioCtx.destination); src.start(t); }
+function playShot(){ ensureAudio(); ping(210,.05,'square',.055,0); ping(170,.08,'triangle',.04,.01); noiseBurst(.06,.02,0); }
+function playHit(){ ensureAudio(); ping(720,.05,'triangle',.04,0); ping(960,.07,'sine',.025,.02); }
+function playMiss(){ ensureAudio(); ping(180,.08,'sawtooth',.03,0); }
+function playWaveClear(){ ensureAudio(); ping(660,.06,'sine',.03,0); ping(880,.07,'sine',.03,.05); ping(1160,.08,'sine',.025,.1); }
+function playFail(){ ensureAudio(); ping(200,.1,'sawtooth',.04,0); ping(160,.14,'triangle',.035,.05); }
+function bounds(){ return game.getBoundingClientRect(); }
+function actOf(stage){ const idx=Math.floor((stage-1)/STAGES_PER_ACT); const level=((stage-1)%STAGES_PER_ACT)+1; return {act:ACTS[idx], index:idx, level}; }
+function stageCount(level){ return Math.min(8, Math.max(1, level)); }
+function stageSeconds(level, actKey){ const base = level<=2?12:level<=5?15:level<=8?18:20; return actKey==='mixed'?base+2:base; }
+function expectedNo(){ const alive=pests.filter(p=>p.alive).map(p=>p.no); return alive.length?Math.min(...alive):null; }
+function saveRecord(key,val){ localStorage.setItem(key,String(val)); }
+function getNum(key){ return Number(localStorage.getItem(key)||0); }
+function rememberProgress(){ if(score>getNum('pest_best_score')) saveRecord('pest_best_score',score); if(wave>getNum('pest_best_wave')) saveRecord('pest_best_wave',wave); }
+function recordKill(){ saveRecord('pest_total_kills', getNum('pest_total_kills')+1); }
+function updateHud(){ const {act,level}=actOf(wave); waveLabel.textContent=act.name+' '+level+'단계'; scoreEl.textContent=score; missDotsEl.textContent=[0,1,2].map(i=>i<misses?'●':'○').join(''); }
+function showBanner(text){ banner.textContent=text; banner.animate([{transform:'translateX(-50%) scale(.84)',opacity:.2},{transform:'translateX(-50%) scale(1)',opacity:1}],{duration:220,fill:'forwards'}); }
+function setMessage(text){ messageEl.textContent=text; }
+function stopTimer(){ if(timerHandle){ clearInterval(timerHandle); timerHandle=null; } }
+function startTimer(){ stopTimer(); const meta=actOf(wave); const sec=stageSeconds(meta.level, meta.act.key); stageDeadline=performance.now()+sec*1000; timeLeftEl.textContent=sec.toFixed(1)+'s'; timerHandle=setInterval(()=>{ if(transitioning) return; const left=Math.max(0,(stageDeadline-performance.now())/1000); timeLeftEl.textContent=left.toFixed(1)+'s'; if(left<=0){ stopTimer(); failStage('시간 안에 해충을 정리하지 못했어요.'); } },100); }
+function pestHtml(type,no){ if(type==='mosquito') return '<div class="wing l"></div><div class="wing r"></div><div class="head"></div><div class="body"></div><div class="tail"></div><div class="eye l"></div><div class="eye r"></div><div class="leg"></div><div class="beak"></div><div class="no">'+no+'</div>'; if(type==='moth') return '<div class="wing l"></div><div class="wing r"></div><div class="head"></div><div class="body"></div><div class="eye l"></div><div class="eye r"></div><div class="antenna"></div><div class="leg"></div><div class="no">'+no+'</div>'; return '<div class="wing l"></div><div class="wing r"></div><div class="antenna"></div><div class="leg"></div><div class="head"></div><div class="body"></div><div class="tail"></div><div class="eye l"></div><div class="eye r"></div><div class="no">'+no+'</div>'; }
+function createPestType(meta, idx){ if(meta.act.key!=='mixed') return meta.act.key; if(meta.level<=3) return idx%2===0?'fly':'mosquito'; if(meta.level<=6) return ['fly','mosquito','moth'][idx%3]; return ['mosquito','fly','moth'][Math.floor(Math.random()*3)]; }
+function motionProfile(type, level){ if(type==='mosquito') return {speed:180+level*14, turn:3.9+level*0.11, wiggle:24+level*1.1, bob:17+level*.9}; if(type==='moth') return {speed:118+level*8, turn:2.2+level*0.07, wiggle:18+level*.7, bob:15+level*.7}; return {speed:150+level*10, turn:3.1+level*0.09, wiggle:20+level*.9, bob:16+level*.8}; }
+function spawnStage(){ pests.forEach(p=>p.el.remove()); pests=[]; misses=0; overlay.style.display='none'; transitioning=false; running=true; updateHud(); const meta=actOf(wave); const count=stageCount(meta.level); const r=bounds(); for(let i=0;i<count;i++){ const type=createPestType(meta,i); const el=document.createElement('div'); el.className='pest '+type; el.innerHTML=pestHtml(type,i+1); game.appendChild(el); const prof=motionProfile(type, meta.level); const angle=Math.random()*Math.PI*2; const yMin=122, yMax=r.height*0.56; pests.push({el, alive:true, no:i+1, type, x:36+Math.random()*(r.width-72), y:yMin+Math.random()*(yMax-yMin), angle, targetAngle:angle, speed:prof.speed*(0.92+Math.random()*0.18), turnRate:prof.turn, wiggle:prof.wiggle, bob:prof.bob, phase:Math.random()*Math.PI*2, changeIn:.45+Math.random()*.75}); }
+ setMessage('1번부터 차례대로 박멸하세요');
+ showBanner((meta.act.name==='혼합'?'혼합형 ':meta.act.name+' ')+count+'마리 출현!');
+ startTimer(); last=performance.now(); if(!sessionStarted){ saveRecord('pest_play_count', getNum('pest_play_count')+1); sessionStarted=true; } }
+function openResult(success,message){ transitioning=true; running=false; stopTimer(); overlay.style.display='flex'; if(success){ ovCard.classList.remove('fail'); ovIcon.textContent='⭐'; ovTitle.textContent='박멸 성공!'; ovText.textContent=message; retryBtn.textContent='다음 단계'; resetBtn.textContent='처음부터'; }else{ ovCard.classList.add('fail'); ovIcon.textContent='💥'; ovTitle.textContent='박멸 실패'; ovText.textContent=message; retryBtn.textContent='다시 도전'; resetBtn.textContent='처음부터'; } }
+function nextStage(){ rememberProgress(); if(wave<TOTAL_STAGES){ wave++; spawnStage(); } else { playWaveClear(); openResult(true, '모든 해충 웨이브를 정리했어요.\n마을이 다시 조용해졌습니다!'); } }
+function failStage(reason){ playFail(); rememberProgress(); const retryWave=Math.max(1,wave-2); overlay.dataset.retryWave=String(retryWave); const meta=actOf(retryWave); openResult(false, reason+'\n2단계 후퇴 → '+meta.act.name+' '+meta.level+'단계로 돌아갑니다.'); }
+function fireFx(x,y,text,kind='hit'){ const flash=document.createElement('div'); flash.className='hitFx'; flash.style.left=x+'px'; flash.style.top=y+'px'; game.appendChild(flash); setTimeout(()=>flash.remove(),220); const t=document.createElement('div'); t.className='hitText'; t.style.left=x+'px'; t.style.top=y+'px'; t.textContent=text; game.appendChild(t); setTimeout(()=>t.remove(),560); rifle.classList.remove('kick','fire'); void rifle.offsetWidth; rifle.classList.add('kick','fire'); setTimeout(()=>rifle.classList.remove('fire'),130); if(kind==='hit') playHit(); else playMiss(); }
+function shoot(x,y){ ensureAudio(); playShot(); if(transitioning||!running) return; const nearest=pests.filter(p=>p.alive).map(p=>({p,d:Math.hypot(p.x-x,p.y-y)})).sort((a,b)=>a.d-b.d)[0]; const hitRadius = nearest ? (nearest.p.type==='moth'?34: nearest.p.type==='mosquito'?26:30) : 30; if(nearest&&nearest.d<hitRadius){ const need=expectedNo(); if(nearest.p.no!==need){ misses++; updateHud(); setMessage(need+'번을 먼저 맞혀야 합니다'); fireFx(x,y,'MISS','miss'); if(misses>=3) failStage('번호 순서를 놓쳤어요.'); return; } nearest.p.alive=false; nearest.p.el.remove(); score += 100 * actOf(wave).level + (actOf(wave).index*100); recordKill(); updateHud(); setMessage('좋아요! 다음 번호를 노려보세요'); fireFx(nearest.p.x,nearest.p.y,'HIT!','hit'); if(pests.every(p=>!p.alive)){ playWaveClear(); setTimeout(nextStage,360); } } else { misses++; updateHud(); setMessage('조준을 조금 더 정확히 맞춰보세요'); fireFx(x,y,'MISS','miss'); if(misses>=3) failStage('MISS가 3회 누적되었어요.'); } }
+function aimAt(x,y){ cross.style.left=x+'px'; cross.style.top=y+'px'; const r=bounds(); const dx=x-r.width/2; const dy=Math.max(88, r.height-y); const ang=(Math.atan2(dx,dy)*180/Math.PI)*0.82; rifle.style.setProperty('--ang', ang+'deg'); }
+function loop(now){ const dt=Math.min(.03,(now-last)/1000); last=now; if(running){ const r=bounds(); const yMin=122, yMax=r.height*0.56, xMin=30, xMax=r.width-30; pests.filter(p=>p.alive).forEach((p,i)=>{ p.phase += dt*(4.8 + p.turnRate*.65); p.changeIn -= dt; if(p.changeIn<=0){ p.targetAngle += (Math.random()*2-1)*(0.9 + p.turnRate*.18); p.changeIn = 0.26 + Math.random()*.5; }
+        let diff = ((p.targetAngle - p.angle + Math.PI*3)%(Math.PI*2)) - Math.PI;
+        p.angle += diff * Math.min(1, dt*(2.5 + p.turnRate));
+        const vx = Math.cos(p.angle) * p.speed;
+        const vy = Math.sin(p.angle) * p.speed * 0.72;
+        p.x += vx*dt + Math.cos(p.phase*1.7) * p.wiggle * dt;
+        p.y += vy*dt + Math.sin(p.phase*1.9) * p.bob * dt;
+        if(p.x<xMin || p.x>xMax){ p.x=Math.max(xMin, Math.min(xMax, p.x)); p.targetAngle = Math.PI - p.targetAngle; p.angle = Math.PI - p.angle; }
+        if(p.y<yMin || p.y>yMax){ p.y=Math.max(yMin, Math.min(yMax, p.y)); p.targetAngle = -p.targetAngle; p.angle = -p.angle; }
+        // subtle avoidance
+        pests.filter(q=>q!==p && q.alive).forEach(q=>{ const dx=p.x-q.x, dy=p.y-q.y; const dist=Math.hypot(dx,dy); if(dist>0 && dist<46){ p.x += (dx/dist)*26*dt; p.y += (dy/dist)*18*dt; } });
+        p.el.style.left=p.x+'px'; p.el.style.top=p.y+'px'; const rot = Math.sin(p.phase*2.3)*8 + (p.type==='mosquito'?12: p.type==='moth'?4:6); p.el.style.transform='translate(-50%,-50%) rotate('+rot+'deg) scale('+(1+Math.sin(p.phase*6)*(p.type==='mosquito'?0.03:0.02))+')';
+        const wings=p.el.querySelectorAll('.wing'); if(p.type==='mosquito'){ const flap=1+Math.sin(p.phase*26)*0.6; wings[0].style.transform='rotate('+(-30-flap*28)+'deg)'; wings[1].style.transform='rotate('+(30+flap*28)+'deg)'; }
+        else if(p.type==='moth'){ const flap=1+Math.sin(p.phase*11)*0.3; wings[0].style.transform='rotate('+(-25-flap*10)+'deg)'; wings[1].style.transform='scaleX(-1) rotate('+(-25-flap*10)+'deg)'; }
+        else { const flap=1+Math.sin(p.phase*18)*0.28; wings[0].style.transform='rotate('+(-22-flap*14)+'deg)'; wings[1].style.transform='rotate('+(22+flap*14)+'deg)'; }
+      }); }
+      requestAnimationFrame(loop); }
 
-const MAX_WAVE=10;
-let wave=1, score=0, misses=0, flies=[], transitioning=false, running=true, last=performance.now(), timerHandle=null, stageDeadline=0, sessionStarted=false;
-
-function bounds(){return game.getBoundingClientRect()}
-function stageSeconds(w){return w===1?10:w<=3?15:w<=6?20:25}
-function expectedNo(){const alive=flies.filter(f=>f.alive).map(f=>f.no);return alive.length?Math.min(...alive):null}
-function updateHud(){waveLabel.textContent='파리 '+wave+'단계';scoreEl.textContent=score;missDotsEl.textContent=[0,1,2].map(i=>i<misses?'●':'○').join('');}
-function saveRecord(key,val){localStorage.setItem(key,String(val))}
-function getNum(key){return Number(localStorage.getItem(key)||0)}
-function recordKill(){saveRecord('pest_total_kills',getNum('pest_total_kills')+1)}
-function rememberProgress(){if(score>getNum('pest_best_score'))saveRecord('pest_best_score',score);if(wave>getNum('pest_best_wave'))saveRecord('pest_best_wave',wave)}
-function showBanner(text){banner.textContent=text;banner.animate([{transform:'translateX(-50%) scale(.84)',opacity:.2},{transform:'translateX(-50%) scale(1)',opacity:1}],{duration:220,fill:'forwards'});clearTimeout(showBanner._t);showBanner._t=setTimeout(()=>{banner.style.opacity='1'},200)}
-function stopTimer(){if(timerHandle){clearInterval(timerHandle);timerHandle=null}}
-function startTimer(){stopTimer();const sec=stageSeconds(wave);stageDeadline=performance.now()+sec*1000;timeLeftEl.textContent=sec.toFixed(1)+'s';timerHandle=setInterval(()=>{if(transitioning)return;const left=Math.max(0,(stageDeadline-performance.now())/1000);timeLeftEl.textContent=left.toFixed(1)+'s';if(left<=0){stopTimer();failStage('시간 안에 해충을 정리하지 못했어요.');}},100)}
-function bugHtml(no){return '<div class="wing l"></div><div class="wing r"></div><div class="antenna"></div><div class="leg"></div><div class="head"></div><div class="thorax"></div><div class="tail"></div><div class="eye l"></div><div class="eye r"></div><div class="bugNo">'+no+'</div>'}
-function spawn(count){flies.forEach(f=>f.el.remove());flies=[];misses=0;updateHud();overlay.style.display='none';transitioning=false;running=true;storyTag.textContent='1번부터 차례대로 박멸하세요';const r=bounds();for(let i=0;i<count;i++){const el=document.createElement('div');el.className='bug';el.innerHTML=bugHtml(i+1);game.appendChild(el);const angle=Math.random()*Math.PI*2;const speed=104+wave*11;flies.push({el,alive:true,no:i+1,x:48+Math.random()*(r.width-96),y:120+Math.random()*(r.height*0.49-120),vx:Math.cos(angle)*speed,vy:Math.sin(angle)*(speed*0.68),phase:Math.random()*Math.PI*2})}showBanner(count+'마리 출현!');startTimer();last=performance.now();if(!sessionStarted){saveRecord('pest_play_count',getNum('pest_play_count')+1);sessionStarted=true;}}
-function openResult(success,message){transitioning=true;running=false;stopTimer();overlay.style.display='flex';if(success){ovCard.classList.remove('fail');ovIcon.textContent='⭐';ovTitle.textContent='박멸 성공!';ovText.textContent=message;retryBtn.textContent='다음 단계';resetBtn.textContent='메인으로';}else{ovCard.classList.add('fail');ovIcon.textContent='💥';ovTitle.textContent='박멸 실패';ovText.textContent=message;retryBtn.textContent='다시 도전';resetBtn.textContent='처음부터';}}
-function nextWave(){rememberProgress();if(wave<MAX_WAVE){wave++;spawn(wave);}else{rememberProgress();openResult(true,'모든 파리 단계를 정리했어요.\n마을이 다시 조용해졌습니다!');}}
-function failStage(reason){rememberProgress();const retryWave=Math.max(1,wave-2);overlay.dataset.retryWave=String(retryWave);openResult(false,reason+'\n'+wave+'단계에서 실패하여 '+retryWave+'단계로 후퇴합니다.');}
-function fireFx(x,y,text){const flash=document.createElement('div');flash.className='hitFx';flash.style.left=x+'px';flash.style.top=y+'px';game.appendChild(flash);setTimeout(()=>flash.remove(),220);const t=document.createElement('div');t.className='hitText';t.style.left=x+'px';t.style.top=y+'px';t.textContent=text;game.appendChild(t);setTimeout(()=>t.remove(),520);rifle.classList.remove('kick','fire');void rifle.offsetWidth;rifle.classList.add('kick','fire');setTimeout(()=>rifle.classList.remove('fire'),130)}
-function shoot(x,y){if(transitioning||!running)return;const nearest=flies.filter(f=>f.alive).map(f=>({f,d:Math.hypot(f.x-x,f.y-y)})).sort((a,b)=>a.d-b.d)[0];if(nearest&&nearest.d<30){const need=expectedNo();if(nearest.f.no!==need){misses++;updateHud();storyTag.textContent=need+'번을 먼저 맞혀야 해요!';fireFx(x,y,'MISS');if(misses>=3)failStage('번호 순서를 놓쳤어요.');return;}nearest.f.alive=false;nearest.f.el.remove();score+=100*wave;recordKill();updateHud();storyTag.textContent='좋아요! 다음 번호를 노려보세요';fireFx(nearest.f.x,nearest.f.y,'HIT!');if(flies.every(f=>!f.alive))setTimeout(nextWave,320);}else{misses++;updateHud();storyTag.textContent='정확히 조준해보세요';fireFx(x,y,'MISS');if(misses>=3)failStage('MISS가 3회 누적되었어요.');}}
-function aimAt(x,y){cross.style.left=x+'px';cross.style.top=y+'px';const r=bounds();const ang=Math.atan2(x-r.width/2,Math.max(72,r.height-y))*18;rifle.style.setProperty('--ang', ang+'deg')}
-function loop(now){const dt=Math.min(0.03,(now-last)/1000);last=now;if(running){const r=bounds();flies.filter(f=>f.alive).forEach((f,i)=>{f.phase+=dt*(4.2+i*0.1);f.vx+=Math.sin(f.phase*1.8)*(14+wave*1.7)*dt;f.vy+=Math.cos(f.phase*2.0)*(13+wave*1.6)*dt;f.x+=f.vx*dt+Math.sin(f.phase)*(6+wave*0.55)*dt;f.y+=f.vy*dt+Math.cos(f.phase*1.18)*(5+wave*0.48)*dt;if(f.x<28||f.x>r.width-28)f.vx*=-1;if(f.y<110||f.y>r.height*0.53)f.vy*=-1;f.x=Math.max(28,Math.min(r.width-28,f.x));f.y=Math.max(110,Math.min(r.height*0.53,f.y));f.el.style.left=f.x+'px';f.el.style.top=f.y+'px';f.el.style.transform='translate(-50%,-50%) rotate('+Math.sin(f.phase*2.4)*10+'deg)';const flutter=1+Math.sin(f.phase*18)*0.08;const wings=f.el.querySelectorAll('.wing');wings[0].style.transform='rotate('+( -20 - flutter*20 )+'deg)';wings[1].style.transform='rotate('+( 20 + flutter*20 )+'deg)';})}requestAnimationFrame(loop)}
-
-game.addEventListener('pointermove',e=>{const r=bounds();aimAt(e.clientX-r.left,e.clientY-r.top)});
-game.addEventListener('pointerdown',e=>{if(e.target.closest('#backBtn')||e.target.closest('#overlay'))return;const r=bounds();shoot(e.clientX-r.left,e.clientY-r.top)});
-document.getElementById('backBtn').addEventListener('click',()=>{if(window.AppNav)AppNav.postMessage('back')});
-retryBtn.addEventListener('click',()=>{if(retryBtn.textContent==='다음 단계'){overlay.style.display='none';transitioning=false;running=true;spawn(Math.min(MAX_WAVE,wave));}else{wave=Number(overlay.dataset.retryWave||wave);spawn(wave);}});
-resetBtn.addEventListener('click',()=>{if(resetBtn.textContent==='메인으로'){if(window.AppNav){AppNav.postMessage('back');}else{wave=1;score=0;misses=0;sessionStarted=false;updateHud();spawn(1);}}else{wave=1;score=0;misses=0;sessionStarted=false;updateHud();spawn(1);}});
-const r=bounds();aimAt(r.width/2,r.height*0.44);updateHud();spawn(1);requestAnimationFrame(loop);
+game.addEventListener('pointermove', e=>{ const r=bounds(); aimAt(e.clientX-r.left, e.clientY-r.top); });
+game.addEventListener('pointerdown', e=>{ if(e.target.closest('#overlay')) return; const r=bounds(); shoot(e.clientX-r.left, e.clientY-r.top); });
+retryBtn.addEventListener('click', ()=>{ ensureAudio(); if(retryBtn.textContent==='다음 단계'){ overlay.style.display='none'; transitioning=false; running=true; spawnStage(); } else { wave=Number(overlay.dataset.retryWave||wave); spawnStage(); } });
+resetBtn.addEventListener('click', ()=>{ ensureAudio(); wave=1; score=0; misses=0; sessionStarted=false; updateHud(); spawnStage(); });
+const r=bounds(); aimAt(r.width/2, r.height*0.4); updateHud(); spawnStage(); requestAnimationFrame(loop);
 </script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 name: pest_eradication
-description: Pest Eradication casual patch game
+description: Pest Eradication stage + audio + art patch
 publish_to: "none"
-version: 0.1.4+5
+version: 0.1.5+6
 environment:
   sdk: ">=3.3.0 <4.0.0"
 dependencies:
