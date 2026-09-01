@@ -49,11 +49,11 @@ jobs:
         run: flutter build apk --release
 
       - name: Rename APK
-        run: cp build/app/outputs/flutter-apk/app-release.apk pest-eradication-v0.1.7.2.apk
+        run: cp build/app/outputs/flutter-apk/app-release.apk HAECHUNG_BAKMYEOL_V1.0.0_FINAL_MASTER.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: pest-eradication-v0.1.7.2-apk
-          path: pest-eradication-v0.1.7.2.apk
+          name: HAECHUNG_BAKMYEOL_V1.0.0_FINAL_MASTER-apk
+          path: HAECHUNG_BAKMYEOL_V1.0.0_FINAL_MASTER.apk
           retention-days: 30
