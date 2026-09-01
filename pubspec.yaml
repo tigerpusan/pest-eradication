@@ -1,7 +1,7 @@
 name: pest_eradication
-description: Pest Eradication V0.1.7.2 shotgun zone audio patch
+description: HAECHUNG BAKMYEOL V1.0.0 FINAL MASTER
 publish_to: "none"
-version: 0.1.7+10
+version: 1.0.0+100
 environment:
   sdk: ">=3.3.0 <4.0.0"
 dependencies:
@@ -19,3 +19,7 @@ flutter:
     - assets/web/game.html
     - assets/icon/app_icon.png
     - assets/game_art/
+    - assets/game_art/backgrounds/
+    - assets/game_art/pests/
+    - assets/game_art/weapons/
+    - assets/game_art/ui/
